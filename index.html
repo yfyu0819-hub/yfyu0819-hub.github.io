@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Designer Portfolio</title>
+  <style>
+    /* 全局样式重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #000;
+    }
+
+    /* 1. 导航栏 */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #000;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffcc00;
+    }
+
+    .lang-toggle {
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      background: rgba(255, 255, 255, 0.72);
+      color: #000;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: background-color 0.25s, border-color 0.25s, transform 0.25s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lang-toggle:hover {
+      background: rgba(255, 255, 255, 0.92);
+      border-color: rgba(0, 0, 0, 0.24);
+      transform: translateY(-1px);
+    }
+
+    .lang-dropdown {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .lang-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-caret {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid rgba(0, 0, 0, 0.7);
+      transform: translateY(1px);
+    }
+
+    .lang-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 10px);
+      min-width: 190px;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+      display: none;
+      z-index: 200;
+    }
+
+    .lang-dropdown.open .lang-menu {
+      display: block;
+    }
+
+    .lang-menu-title {
+      font-size: 0.8rem;
+      opacity: 0.7;
+      padding: 2px 6px 8px;
+      text-align: left;
+      user-select: none;
+    }
+
+    .lang-option {
+      width: 100%;
+      text-align: left;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      color: #000;
+      border-radius: 12px;
+      padding: 10px 10px;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .lang-option + .lang-option {
+      margin-top: 8px;
+    }
+
+    .lang-option:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+
+    .lang-option[aria-selected="true"] {
+      border-color: rgba(0, 0, 0, 0.28);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    /* 锚点滚动时，避免标题被固定导航遮住 */
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    /* 2. Hero 区 - 聚光灯动效 */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-color: #f8f8f8;
+      overflow: hidden;
+      padding: 0 20px;
+      --hero-x: 0px;
+      --hero-y: 0px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      line-height: 1.1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: center;
+      transform: translate3d(var(--hero-x), var(--hero-y), 0);
+      transition: transform 220ms cubic-bezier(0.2, 0.75, 0.2, 1);
+    }
+
+    .hero h1 span {
+      color: inherit;
+      display: block;
+      opacity: 0;
+      transform: translateY(14px);
+      filter: blur(6px);
+      will-change: transform, opacity, filter;
+      animation: heroLineIn 720ms cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+    }
+
+    .hero h1 span:nth-of-type(1) {
+      animation-delay: 60ms;
+    }
+
+    .hero h1 span:nth-of-type(2) {
+      animation-delay: 200ms;
+    }
+
+    .hero h1 span:nth-of-type(3) {
+      animation-delay: 340ms;
+    }
+
+    @keyframes heroLineIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+        filter: blur(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero h1 span {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
+
+    .hero h1 .accent {
+      color: #ffcc00;
+    }
+
+    .hero h1 .accent {
+      position: relative;
+    }
+
+    .hero h1 .accent::after {
+      content: '';
+      display: none;
+      position: absolute;
+      left: 50%;
+      width: 72px;
+      bottom: -8px;
+      height: 2px;
+      border-radius: 999px;
+      background: #ffcc00;
+      opacity: 0;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: left;
+      animation: accentUnderline 680ms cubic-bezier(0.2, 0.75, 0.2, 1) forwards;
+      animation-delay: 260ms;
+    }
+
+    @keyframes accentUnderline {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) scaleX(0);
+      }
+      to {
+        opacity: 0.75;
+        transform: translateX(-50%) scaleX(1);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero h1 .accent::after {
+        animation: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .decor {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: rgba(255, 204, 0, 0.2);
+      animation: float 6s infinite ease-in-out;
+    }
+
+    .decor-1 {
+      top: 20%;
+      left: 10%;
+    }
+
+    .decor-2 {
+      bottom: 30%;
+      right: 15%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0);
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+      }
+    }
+
+    /* 聚光灯效果 */
+    .spotlight {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8), transparent 70%);
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      will-change: left, top;
+    }
+
+    /* 3. 项目展示区 - 手风琴卡片 */
+    .projects {
+      padding: 96px 20px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .projects h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .project-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .project-card {
+      background-color: #333;
+      border-radius: 8px;
+      padding: 20px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      background-color: #ffcc00;
+      color: #000;
+    }
+
+    .project-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      margin-bottom: 15px;
+    }
+
+    .project-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .project-tag {
+      background-color: #555;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      transition: background-color 0.3s;
+    }
+
+    .project-card:hover .project-tag {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .card-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .project-card.active .card-content {
+      max-height: 800px;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      margin-top: 12px;
+    }
+
+    .project-gallery {
+      display: flex;
+      gap: 14px;
+      margin-top: 14px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      -webkit-overflow-scrolling: touch;
+      align-items: center;
+    }
+
+    .project-gallery a {
+      flex: 0 0 auto;
+      display: block;
+      border-radius: 10px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .project-gallery a:focus-visible {
+      outline: 2px solid rgba(0, 0, 0, 0.55);
+      outline-offset: 3px;
+    }
+
+    .project-gallery img {
+      height: 240px;
+      width: auto;
+      max-width: 82vw;
+      margin-top: 0;
+      border-radius: 10px;
+      object-fit: contain;
+      cursor: zoom-in;
+      display: block;
+    }
+
+    .project-gallery video {
+      height: 240px;
+      width: auto;
+      max-width: 82vw;
+      aspect-ratio: 16 / 9;
+      margin-top: 0;
+      border-radius: 10px;
+      object-fit: cover;
+      cursor: zoom-in;
+      display: block;
+      background: #000;
+    }
+
+    .project-media {
+      display: block;
+      margin-top: 12px;
+      border-radius: 8px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .project-media:focus-visible {
+      outline: 2px solid rgba(0, 0, 0, 0.55);
+      outline-offset: 3px;
+    }
+
+    .project-media img {
+      margin-top: 0;
+      cursor: zoom-in;
+    }
+
+    .project-video-thumb {
+      display: block;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .project-video-thumb img {
+      height: 240px;
+      width: auto;
+      max-width: 82vw;
+      display: block;
+      object-fit: cover;
+      background: #000;
+      cursor: zoom-in;
+    }
+
+    .video-badge {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      pointer-events: none;
+      user-select: none;
+      text-transform: lowercase;
+    }
+
+    .video-badge svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+      fill: currentColor;
+    }
+
+    /* Lightbox (image preview with close) */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(0, 0, 0, 0.82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .lightbox[hidden] {
+      display: none;
+    }
+
+    .lightbox-panel {
+      position: relative;
+      width: min(1200px, 96vw);
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .lightbox-toolbar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lightbox-speed {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lightbox-speed:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.75);
+      outline-offset: 3px;
+    }
+
+    .lightbox-speed[hidden] {
+      display: none;
+    }
+
+    .lightbox-close {
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lightbox-close:hover {
+      background: rgba(0, 0, 0, 0.7);
+      border-color: rgba(255, 255, 255, 0.38);
+      transform: translateY(-1px);
+    }
+
+    .lightbox-close:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.75);
+      outline-offset: 3px;
+    }
+
+    .lightbox-figure {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      overflow: auto;
+      border-radius: 14px;
+    }
+
+    .lightbox-figure img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .lightbox-figure video {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      display: block;
+      border-radius: 14px;
+      background: #000;
+    }
+
+    .lightbox-figure img[hidden],
+    .lightbox-figure video[hidden] {
+      display: none;
+    }
+
+    /* 4. 关于我 - 刮刮乐头像 */
+    .about {
+      background-color: #000;
+      padding: 0 0 80px;
+    }
+
+    .about-panel {
+      padding: 80px 20px;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .about h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .scratch-cards {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .scratch-card {
+      width: 150px;
+      height: 150px;
+      background-color: #ccc;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: grab;
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .scratch-card:active {
+      cursor: grabbing;
+    }
+
+    .scratch-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 1;
+      transition: opacity 0.5s;
+    }
+
+    .scratch-card span {
+      position: absolute;
+      pointer-events: none;
+      padding: 8px;
+      text-align: center;
+      z-index: 3;
+      color: rgba(255, 255, 255, 0.96);
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    .scratch-card canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      touch-action: none;
+    }
+
+    .keywords {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .keyword-list {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .keyword {
+      padding: 5px 10px;
+      background-color: #ffcc00;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .keyword:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .keyword.active {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .keyword-content {
+      max-width: 800px;
+      text-align: center;
+      display: none;
+    }
+
+    .keyword-content.active {
+      display: block;
+    }
+
+    /* About - cards module (hover color change) */
+    .about-mod {
+      max-width: 1100px;
+      margin: 40px auto 0;
+      padding: 0 10px;
+    }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .about-card {
+      position: relative;
+      border-radius: 28px;
+      padding: 26px 22px 96px;
+      text-align: left;
+      transition: transform 0.25s, filter 0.25s, outline-color 0.25s, box-shadow 0.25s;
+      outline: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .about-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 14px;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      line-height: 1.08;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      hyphens: auto;
+    }
+
+    .about-card p {
+      font-size: 1rem;
+      line-height: 1.45;
+      opacity: 0.82;
+    }
+
+    .about-card:hover {
+      transform: translateY(-2px);
+      filter: saturate(1.05) contrast(1.03);
+      outline-color: rgba(0, 0, 0, 0.14);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+    }
+
+    .about-card:hover p {
+      opacity: 0.95;
+    }
+
+    .about-card--pink {
+      background: linear-gradient(180deg, #ffd7e7 0%, #ffc2da 100%);
+    }
+    .about-card--yellow {
+      background: linear-gradient(180deg, #ffeab3 0%, #ffd98a 100%);
+    }
+    .about-card--blue {
+      background: linear-gradient(180deg, #b7d2ff 0%, #9dc2ff 100%);
+    }
+    .about-card--green {
+      background: linear-gradient(180deg, #c8efd8 0%, #b3e5cc 100%);
+    }
+
+    .card-doodle {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      width: 156px;
+      height: 76px;
+      opacity: 0.95;
+      color: rgba(0, 0, 0, 0.92);
+      transform: translateX(-50%);
+    }
+
+    .card-doodle .s {
+      stroke: currentColor;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .card-doodle .f {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .card-doodle .bg {
+      fill: currentColor;
+      opacity: 0.06;
+    }
+
+    .card-doodle .s-soft {
+      stroke: currentColor;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.35;
+      vector-effect: non-scaling-stroke;
+    }
+
+    /* 5. 联系区 - 动态标签云 + 眼睛跟随 */
+    .contact {
+      position: relative;
+      padding: 110px 20px 80px;
+      background-color: #ffcc00;
+      text-align: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -36px;
+      height: 72px;
+      background:
+        radial-gradient(circle at 36px 36px, #ffcc00 0 36px, transparent 37px);
+      background-size: 72px 72px;
+      background-repeat: repeat-x;
+      pointer-events: none;
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      padding-bottom: 140px;
+    }
+
+    .contact-stage {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: auto;
+    }
+
+    .contact h2 {
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .contact p {
+      max-width: 760px;
+      margin: 0 auto;
+      opacity: 0.75;
+      line-height: 1.5;
+      display: inline-block;
+      padding: 12px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+    }
+
+    .contact-center {
+      margin: 26px auto 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px 12px 18px;
+      border-radius: 999px;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.95rem;
+      line-height: 1;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pill-eyes {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+      padding-left: 2px;
+    }
+
+    .pill-eye {
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .pill-pupil {
+      width: 7px;
+      height: 7px;
+      background: #000;
+      border-radius: 999px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      will-change: transform;
+    }
+
+    .tag-physics {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 320px;
+      touch-action: none;
+      user-select: none;
+      pointer-events: auto;
+      overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-content: flex-end;
+      gap: 10px;
+      padding: 18px 14px;
+      z-index: 1;
+    }
+
+    .tag-physics.physics-on {
+      display: block;
+      padding: 0;
+      top: 0;
+      bottom: 0;
+      height: auto;
+    }
+
+    .tag-chip {
+      position: static;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 14px;
+      background: #fff;
+      color: #000;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      border: none;
+      cursor: grab;
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+      transform-origin: center;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+      will-change: transform;
+      pointer-events: auto;
+    }
+
+    .tag-physics.physics-on .tag-chip {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .tag-chip:active {
+      cursor: grabbing;
+    }
+
+    /* 响应式适配 */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .contact {
+        padding-top: 96px;
+      }
+
+      .contact-stage {
+        inset: 0;
+      }
+
+      .contact-inner {
+        padding-bottom: 160px;
+      }
+
+      .about-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 420px) {
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav>
+    <div class="logo" data-i18n="brand.logo">Muyi</div>
+    <div class="nav-links">
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-toggle lang-btn" id="langBtn" type="button" aria-haspopup="menu" aria-expanded="false">
+          <span data-i18n="lang.label">language</span>
+          <span class="lang-caret" aria-hidden="true"></span>
+        </button>
+        <div class="lang-menu" id="langMenu" role="menu" aria-label="Language">
+          <div class="lang-menu-title" data-i18n="lang.menuTitle">language:</div>
+          <button class="lang-option" type="button" role="menuitemradio" data-lang="zh" data-i18n="lang.zh">Chinese</button>
+          <button class="lang-option" type="button" role="menuitemradio" data-lang="en" data-i18n="lang.en">English</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero 区 - 聚光灯动效 -->
+  <section class="hero">
+    <h1>
+      <span data-i18n="hero.a">SYSTEMS THINKER.</span>
+      <span class="accent" data-i18n="hero.b">EXPERIENCE DESIGNER.</span>
+      <span data-i18n="hero.c">CURIOUS RESEARCHER.</span>
+    </h1>
+    <div class="decor decor-1"></div>
+    <div class="decor decor-2"></div>
+    <div class="spotlight" id="spotlight"></div>
+  </section>
+
+  <!-- 项目展示区 - 手风琴卡片 -->
+  <section class="projects" id="work">
+    <h2 data-i18n="work.title">Selected Works</h2>
+    <div class="project-cards">
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p1.title">Server & Database Pricing Tool (In-house)</h3>
+        <p data-i18n="work.p1.lead">Cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p1.tag1">Quote Automation</div>
+          <div class="project-tag" data-i18n="work.p1.tag2">Multi-cloud Pricing</div>
+          <div class="project-tag" data-i18n="work.p1.tag3">Decision Support</div>
+        </div>
+        <div class="card-content">
+          <p data-i18n="work.p1.body">Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views. Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team. Sales previously had to check Aliyun, Huawei Cloud, and Tencent Cloud pricing page by page, then manually fill a standard quote sheet and compare specs, pricing, and trade-offs for customers.</p>
+          <div class="project-gallery" aria-label="Project 1 images">
+            <a href="assets/projects/p1-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p1-1.png" alt="Pricing tool screenshot 1" loading="lazy" />
+            </a>
+            <a href="assets/projects/p1-2.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 2 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p1-2.png" alt="Pricing tool screenshot 2" loading="lazy" />
+            </a>
+            <a href="assets/projects/p1-3.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 3 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p1-3.png" alt="Pricing tool screenshot 3" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p2.title">Tree Inventory & QR Lookup System</h3>
+        <p data-i18n="work.p2.lead">Replace Excel-based tree management with a web + mobile workflow, plus a public QR page for residents.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p2.tag1">Web + Mobile</div>
+          <div class="project-tag" data-i18n="work.p2.tag2">QR Public Lookup</div>
+          <div class="project-tag" data-i18n="work.p2.tag3">Audit & Roles</div>
+        </div>
+        <div class="card-content">
+          <p data-i18n="work.p2.body">Role: As a product trainee, I independently delivered this client system end-to-end. Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role/audit basics, and a public no-login QR lookup page. Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.</p>
+          <div class="project-gallery" aria-label="Project 2 images">
+            <a href="assets/projects/p2-1.jpg" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p2-1.jpg" alt="Project 2 screenshot 1" loading="lazy" />
+            </a>
+            <a href="assets/projects/p2-2.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 2 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p2-2.png" alt="Project 2 screenshot 2" loading="lazy" />
+            </a>
+            <a href="assets/projects/p2-3.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 3 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/p2-3.png" alt="Project 2 screenshot 3" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p3.title">Green Carbon Sink Accounting System</h3>
+        <p data-i18n="work.p3.lead">Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p3.tag1">Data Validation</div>
+          <div class="project-tag" data-i18n="work.p3.tag2">Species-specific Formula</div>
+          <div class="project-tag" data-i18n="work.p3.tag3">Map & Reporting</div>
+        </div>
+        <div class="card-content">
+          <p data-i18n="work.p3.body">Role: As a product trainee, I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable. Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export. Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.</p>
+          <div class="project-gallery" aria-label="Project 3 media">
+            <a class="project-video-thumb" href="assets/projects/3-5.mp4" target="_blank" rel="noopener" data-lightbox="video" aria-label="Open project video in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/3-4.png" alt="Project 3 video thumbnail" loading="lazy" />
+              <span class="video-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                  <path d="M8.5 6.7v10.6c0 .8.9 1.3 1.6.9l8.3-5.3c.7-.4.7-1.4 0-1.8l-8.3-5.3c-.7-.4-1.6.1-1.6.9z" />
+                </svg>
+                <span>video</span>
+              </span>
+            </a>
+
+            <a href="assets/projects/3-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/3-1.png" alt="Project 3 screenshot 1" loading="lazy" />
+            </a>
+            <a href="assets/projects/3-2.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 2 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/3-2.png" alt="Project 3 screenshot 2" loading="lazy" />
+            </a>
+            <a href="assets/projects/3-3.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 3 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/3-3.png" alt="Project 3 screenshot 3" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p4.title">Mexico ERP System Stabilization</h3>
+        <p data-i18n="work.p4.lead">During delivery, how do we quickly build test coverage, drive bug closure, verify fixes, and speed up regression?</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p4.tag1">QA & Test Cases</div>
+          <div class="project-tag" data-i18n="work.p4.tag2">Bug Triage</div>
+          <div class="project-tag" data-i18n="work.p4.tag3">Localization & UI</div>
+        </div>
+        <div class="card-content">
+          <p data-i18n="work.p4.body">Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure. Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification. Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2. Coverage included functional defects, localization/translation issues, and UI layout inconsistencies.</p>
+          <div class="project-gallery" aria-label="Project 4 images">
+            <a href="assets/projects/4-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/4-1.png" alt="Project 4 screenshot 1" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p5.title">Food Delivery App (Android / iOS)</h3>
+        <p data-i18n="work.p5.lead">Turn client needs into shippable cross-platform flows: menu → cart → payment → pickup/delivery.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p5.tag1">Requirement Clarification</div>
+          <div class="project-tag" data-i18n="work.p5.tag2">English Stakeholders</div>
+          <div class="project-tag" data-i18n="work.p5.tag3">Payment & Delivery</div>
+        </div>
+        <div class="card-content">
+          <p data-i18n="work.p5.body">Role: I supported an overseas Android/iOS food delivery app and owned requirement clarification with English-speaking stakeholders. Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks. Outcome: improved cross-team alignment and helped the project reach launch delivery. (May–Jul 2025) Core modules included menu browsing, dish details, cart, third-party payment integration (PayPal/Stripe), and pickup vs delivery address/location flows.</p>
+          <div class="project-gallery" aria-label="Project 5 images">
+            <a href="assets/projects/5-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/5-1.png" alt="Project 5 screenshot 1" loading="lazy" />
+            </a>
+            <a href="assets/projects/5-2.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 2 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/5-2.png" alt="Project 5 screenshot 2" loading="lazy" />
+            </a>
+            <a href="assets/projects/5-3.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 3 in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/5-3.png" alt="Project 5 screenshot 3" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于我 - 刮刮乐头像 -->
+  <section class="about" id="about">
+    <div class="about-panel">
+      <h2 data-i18n="about.title">About: Product & Delivery</h2>
+      <div class="scratch-cards">
+        <div class="scratch-card">
+          <span data-i18n="about.scratch.1">Hi, I’m Fay ✨</span>
+          <img src="assets/projects/about-1.jpg" alt="Avatar" />
+          <canvas class="scratch-layer" aria-hidden="true"></canvas>
+        </div>
+        <div class="scratch-card">
+          <span data-i18n="about.scratch.2">Scratch to reveal 🥰</span>
+          <img src="assets/projects/about-2.jpg" alt="Avatar" />
+          <canvas class="scratch-layer" aria-hidden="true"></canvas>
+        </div>
+        <div class="scratch-card">
+          <span data-i18n="about.scratch.3">Nice to meet you 🥳</span>
+          <img src="assets/projects/about-3.jpg" alt="Avatar" />
+          <canvas class="scratch-layer" aria-hidden="true"></canvas>
+        </div>
+      </div>
+
+      <div class="keywords">
+        <div class="keyword-list">
+          <div class="keyword" data-content="art" onclick="showContent('art')" data-i18n="about.kw.art">Abstraction</div>
+          <div class="keyword" data-content="physical" onclick="showContent('physical')" data-i18n="about.kw.physical">Delivery</div>
+          <div class="keyword" data-content="digital" onclick="showContent('digital')" data-i18n="about.kw.digital">Outcomes</div>
+          <div class="keyword" data-content="business" onclick="showContent('business')" data-i18n="about.kw.business">English</div>
+        </div>
+
+        <div class="keyword-content" id="art">
+          <p data-i18n="about.story.art">I learn fast and abstract complex AI/business logic into shippable requirements—20+ PRDs/specs, plus high-fidelity prototypes built with HTML/CSS for alignment.</p>
+        </div>
+        <div class="keyword-content" id="physical">
+          <p data-i18n="about.story.physical">I’ve helped deliver 10+ projects end-to-end: breakdown, prioritization, version planning, and cross-team execution with engineering & QA.</p>
+        </div>
+        <div class="keyword-content" id="digital">
+          <p data-i18n="about.story.digital">Result-oriented: drove 50+ optimizations (flows, translation, product details) to improve stability and usability, and I track impact with clear metrics.</p>
+        </div>
+        <div class="keyword-content" id="business">
+          <p data-i18n="about.story.business">Comfortable working in English, I turn stakeholder feedback into concrete tickets, acceptance criteria, and release plans.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hover cards module (between keywords and contact) -->
+    <div class="about-mod">
+      <div class="about-cards">
+        <div class="about-card about-card--pink">
+          <h3>
+            <span data-i18n="about.cards.creativity.l1">End-to-end</span><br>
+            <span data-i18n="about.cards.creativity.l2">Delivery</span>
+          </h3>
+          <p data-i18n="about.cards.creativity.body">Own the loop: PRD → prototype (HTML/CSS) → dev handoff → QA regression → launch follow-up.</p>
+          <svg class="card-doodle" viewBox="0 0 120 90" aria-hidden="true">
+            <!-- End-to-end delivery: loop + milestones (hand-drawn) -->
+            <path class="bg" d="M16 54c0-20 18-34 44-34s44 14 44 34-18 30-44 30S16 74 16 54z" />
+            <path class="s" d="M20 54c0-18 16-30 40-30s40 12 40 30-16 26-40 26-40-8-40-26z" />
+            <path class="s-soft" d="M20 54c0-18 16-30 40-30s40 12 40 30-16 26-40 26-40-8-40-26z" />
+
+            <!-- arrow head on loop -->
+            <path class="s" d="M90 34l10 2-6 8" />
+            <path class="s-soft" d="M91 33l10 2-6 8" />
+
+            <!-- 4 milestones -->
+            <circle class="s" cx="34" cy="36" r="6" />
+            <circle class="s" cx="62" cy="30" r="6" />
+            <circle class="s" cx="84" cy="50" r="6" />
+            <circle class="s" cx="52" cy="66" r="6" />
+
+            <!-- mini icons inside nodes: doc / prototype / QA / launch -->
+            <path class="s" d="M31 34h6" />
+            <path class="s" d="M31 37h5" />
+            <path class="s" d="M59 30l3-3 3 3" />
+            <path class="s" d="M58 33h8" />
+            <path class="s" d="M81 50l2 2 4-5" />
+            <path class="s" d="M50 66l2-5 4 5" />
+            <path class="s" d="M52 61v10" />
+
+            <!-- texture sparks -->
+            <path class="s" d="M16 26l8-6" />
+            <path class="s" d="M14 38h10" />
+            <path class="s" d="M98 64l8 6" />
+          </svg>
+        </div>
+
+        <div class="about-card about-card--yellow">
+          <h3>
+            <span data-i18n="about.cards.logic.l1">Clear</span><br>
+            <span data-i18n="about.cards.logic.l2">Specs</span>
+          </h3>
+          <p data-i18n="about.cards.logic.body">Turn fuzzy requests into priorities, edge cases, acceptance criteria, and executable tickets that dev & QA can agree on.</p>
+          <svg class="card-doodle" viewBox="0 0 120 90" aria-hidden="true">
+            <!-- Clear specs: doc + checklist + acceptance stamp -->
+            <path class="bg" d="M14 22h54c6 0 10 4 10 10v38c0 6-4 10-10 10H14c-6 0-10-4-10-10V32c0-6 4-10 10-10z" />
+            <path class="s" d="M18 18h44c4 0 7 3 7 7v52c0 4-3 7-7 7H18c-4 0-7-3-7-7V25c0-4 3-7 7-7z" />
+            <path class="s-soft" d="M19 17h44c4 0 7 3 7 7v52c0 4-3 7-7 7H19c-4 0-7-3-7-7V24c0-4 3-7 7-7z" />
+            <!-- bullets -->
+            <circle class="f" cx="26" cy="34" r="2.2" />
+            <circle class="f" cx="26" cy="44" r="2.2" />
+            <circle class="f" cx="26" cy="54" r="2.2" />
+            <path class="s" d="M32 34h26" />
+            <path class="s" d="M32 44h30" />
+            <path class="s" d="M32 54h20" />
+            <path class="s" d="M22 66h36" />
+
+            <!-- stamp circle -->
+            <circle class="s" cx="88" cy="56" r="15" />
+            <circle class="s-soft" cx="89" cy="55" r="15" />
+            <path class="s" d="M80 56l5 5 11-13" />
+            <path class="s-soft" d="M81 55l5 5 11-13" />
+            <!-- little side note -->
+            <path class="s" d="M72 26h34" />
+            <path class="s" d="M76 32h22" />
+            <path class="s" d="M100 30l6-6" />
+          </svg>
+        </div>
+
+        <div class="about-card about-card--blue">
+          <h3>
+            <span data-i18n="about.cards.systems.l1">Systems</span><br>
+            <span data-i18n="about.cards.systems.l2">Thinking</span>
+          </h3>
+          <p data-i18n="about.cards.systems.body">Model workflows, roles, data, and integrations—especially when AI/complex logic needs to be made testable and maintainable.</p>
+          <svg class="card-doodle" viewBox="0 0 120 90" aria-hidden="true">
+            <!-- Systems thinking: architecture blocks + data + integration -->
+            <path class="bg" d="M16 62c0-16 18-28 44-28s44 12 44 28-18 20-44 20-44-4-44-20z" />
+
+            <!-- top layer -->
+            <rect class="s" x="18" y="18" width="34" height="16" rx="6" />
+            <rect class="s" x="68" y="18" width="34" height="16" rx="6" />
+            <path class="s-soft" d="M19 17h34c3 0 6 3 6 6v4c0 3-3 6-6 6H19c-3 0-6-3-6-6v-4c0-3 3-6 6-6z" />
+
+            <!-- middle orchestrator -->
+            <rect class="s" x="42" y="42" width="36" height="18" rx="8" />
+            <path class="s" d="M36 34c8 8 14 12 22 18" />
+            <path class="s" d="M86 34c-8 8-14 12-22 18" />
+            <path class="s-soft" d="M37 33c8 8 14 12 22 18" />
+
+            <!-- database -->
+            <path class="s" d="M30 66c0-6 10-10 22-10s22 4 22 10-10 10-22 10-22-4-22-10z" />
+            <path class="s" d="M30 66v8c0 6 10 10 22 10s22-4 22-10v-8" />
+            <path class="s" d="M30 74c0 6 10 10 22 10s22-4 22-10" />
+            <path class="s-soft" d="M31 65c0-6 10-10 22-10s22 4 22 10-10 10-22 10-22-4-22-10z" />
+
+            <!-- integration plug -->
+            <path class="s" d="M92 56v10" />
+            <path class="s" d="M98 56v10" />
+            <path class="s" d="M89 60h12" />
+            <path class="s" d="M90 66c0 6 10 8 10 0" />
+            <path class="s" d="M84 70c6-2 10-4 14-8" />
+
+            <!-- little orbit / connections -->
+            <circle class="s" cx="60" cy="51" r="2.6" />
+            <circle class="s" cx="36" cy="26" r="2.6" />
+            <circle class="s" cx="86" cy="26" r="2.6" />
+          </svg>
+        </div>
+
+        <div class="about-card about-card--green">
+          <h3>
+            <span data-i18n="about.cards.collab.l1">English</span><br>
+            <span data-i18n="about.cards.collab.l2">Collaboration</span>
+          </h3>
+          <p data-i18n="about.cards.collab.body">Communicate clearly with cross-functional teams and English-speaking stakeholders, keeping updates frequent and decisions explicit.</p>
+          <svg class="card-doodle" viewBox="0 0 120 90" aria-hidden="true">
+            <!-- English collaboration: chat + meeting + EN badge -->
+            <path class="bg" d="M18 26h44c8 0 14 6 14 14v4c0 8-6 14-14 14H40L24 68l4-10H18c-8 0-14-6-14-14v-4c0-8 6-14 14-14z" />
+
+            <!-- two chat bubbles -->
+            <path class="s" d="M16 26h44c6 0 10 4 10 10v8c0 6-4 10-10 10H38l-14 10 4-10H16c-6 0-10-4-10-10v-8c0-6 4-10 10-10z" />
+            <path class="s-soft" d="M17 25h44c6 0 10 4 10 10v8c0 6-4 10-10 10H39l-14 10 4-10H17c-6 0-10-4-10-10v-8c0-6 4-10 10-10z" />
+            <path class="s" d="M68 22h36c5 0 9 4 9 9v10c0 5-4 9-9 9H90l-10 8 2-8H68c-5 0-9-4-9-9V31c0-5 4-9 9-9z" />
+            <path class="s" d="M24 40h24" />
+            <path class="s" d="M24 48h18" />
+
+            <!-- EN badge -->
+            <rect class="s" x="18" y="60" width="44" height="18" rx="9" />
+            <path class="s" d="M28 73V65h10" />
+            <path class="s" d="M28 69h8" />
+            <path class="s" d="M28 73h10" />
+            <path class="s" d="M44 73V65l10 8v-8" />
+
+            <!-- small 'broadcast' marks -->
+            <path class="s" d="M94 60c6-2 10-6 12-12" />
+            <path class="s" d="M100 60c6-4 10-10 10-16" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系区 - 动态标签云 + 眼睛跟随 -->
+  <section class="contact" id="contact">
+    <div class="contact-stage" aria-hidden="true">
+      <div class="tag-physics" id="tagPhysics" aria-label="Skill tags">
+        <button class="tag-chip" type="button" data-i18n="contact.tag.journey">REQUIREMENTS</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.problem">PROBLEM FRAMING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.figma">FIGMA</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.basic">ENGLISH COMMUNICATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.framer">PROTOTYPING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.usability">UAT & TESTING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.adobe">DOCUMENTATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.rhino">API INTEGRATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.designSystems">SYSTEMS THINKING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.wireframes">WIREFRAMES</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.taskFlows">TASK FLOWS</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.prototyping">RELEASE PLANNING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.competitive">EDGE CASES</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.userResearch">USER FEEDBACK</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.stakeholder">CROSS-TEAM COMMUNICATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.responsive">MOBILE / WEB</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.accessibility">LOCALIZATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.uxStructure">ACCEPTANCE CRITERIA</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.html">HTML</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.service">PROCESS MAPPING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.story">CLEAR WRITING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.max">BUG TRIAGE</button>
+      </div>
+    </div>
+    <div class="contact-inner">
+      <h2 data-i18n="contact.title">Let’s Connect</h2>
+      <p data-i18n="contact.body">I’m Fay Yang (杨丰毓), a product trainee focused on end-to-end delivery—requirements, cross-team coordination, QA, and launch support. If you’re hiring for product/PM roles, I’d love to chat.</p>
+
+      <div class="contact-center" id="contactCenter">
+        <a class="contact-pill" id="pillEmail" href="mailto:2362611643@qq.com">
+          <span>2362611643@qq.com</span>
+          <span class="pill-eyes" aria-hidden="true">
+            <span class="pill-eye"><span class="pill-pupil"></span></span>
+            <span class="pill-eye"><span class="pill-pupil"></span></span>
+          </span>
+        </a>
+        <button class="contact-pill" id="pillWeChat" type="button">
+          <span data-i18n="contact.wechat">WeChat: potato0com</span>
+          <span class="pill-eyes" aria-hidden="true">
+            <span class="pill-eye"><span class="pill-pupil"></span></span>
+            <span class="pill-eye"><span class="pill-pupil"></span></span>
+          </span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lightbox: image preview -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Media preview">
+    <div class="lightbox-panel">
+      <div class="lightbox-toolbar">
+        <select class="lightbox-speed" id="lightboxSpeed" hidden aria-label="Playback speed">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1" selected>1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5">1.5×</option>
+          <option value="2">2×</option>
+        </select>
+        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close preview">×</button>
+      </div>
+      <div class="lightbox-figure" role="document">
+        <img id="lightboxImg" alt="" />
+        <video id="lightboxVideo" controls playsinline hidden></video>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // i18n (EN / 中文)
+    const LANG_KEY = 'portfolio.lang';
+    const I18N = {
+      en: {
+        'meta.title': 'Fay Yang | Portfolio',
+        'brand.logo': 'Fay Yang',
+        'nav.work': 'Work',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'lang.label': 'language',
+        'lang.menuTitle': 'language:',
+        'lang.zh': 'Chinese',
+        'lang.en': 'English',
+        'hero.a': 'Systems thinker.',
+        'hero.b': 'Turn models into experiences.',
+        'hero.c': 'Iterate with data.',
+
+        'work.title': 'Selected Works',
+        'work.p1.title': 'Server & Database Pricing Tool (In-house)',
+        'work.p1.lead': 'How can we cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons?',
+        'work.p1.tag1': 'Quote Automation',
+        'work.p1.tag2': 'Multi-cloud Pricing',
+        'work.p1.tag3': 'Decision Support',
+        'work.p1.body': 'Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views. Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team. Sales previously had to check Aliyun, Huawei Cloud, and Tencent Cloud pricing page by page, then manually fill a standard quote sheet and compare specs, pricing, and trade-offs for customers.',
+
+        'work.p2.title': 'Tree Inventory & QR Lookup System',
+        'work.p2.lead': 'Replace Excel-based tree management with a web + mobile workflow, plus a public QR page for residents (168 trees).',
+        'work.p2.tag1': 'Web + Mobile',
+        'work.p2.tag2': 'QR Public Lookup',
+        'work.p2.tag3': 'Audit & Roles',
+        'work.p2.body': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently delivered this client system end-to-end. Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role-based access and audit logs, and a public no-login QR page for residents to check basic tree info. Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.',
+
+        'work.p3.title': 'Green Carbon Sink Accounting System',
+        'work.p3.lead': 'Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).',
+        'work.p3.tag1': 'Data Validation',
+        'work.p3.tag2': 'Species-specific Formula',
+        'work.p3.tag3': 'Map & Reporting',
+        'work.p3.body': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable. Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export. Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.',
+
+        'work.p4.title': 'Mexico ERP System Stabilization',
+        'work.p4.lead': 'During delivery, how do we quickly build test coverage, drive bug closure, verify fixes, and speed up regression?',
+        'work.p4.tag1': 'QA & Test Cases',
+        'work.p4.tag2': 'Bug Triage',
+        'work.p4.tag3': 'Localization & UI',
+        'work.p4.body': 'Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure. Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification. Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2. Coverage included functional defects, localization/translation issues, and UI layout inconsistencies.',
+
+        'work.p5.title': 'Food Delivery App (Android / iOS)',
+        'work.p5.lead': 'Turn client needs into shippable cross-platform flows: menu → cart → payment → pickup/delivery.',
+        'work.p5.tag1': 'Requirement Clarification',
+        'work.p5.tag2': 'English Stakeholders',
+        'work.p5.tag3': 'Payment & Delivery',
+        'work.p5.body': 'Role: I supported an overseas Android/iOS food delivery app (May–Jul 2025) and owned requirement clarification with English-speaking stakeholders. Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks. Outcome: improved cross-team alignment and helped the project reach launch delivery. Core modules included menu browsing, dish details, cart, third-party payment integration (PayPal/Stripe), and pickup vs delivery address/location flows.',
+
+        'about.title': 'About: Product & Delivery',
+        'about.scratch.1': 'Hi, I’m Fay ✨',
+        'about.scratch.2': 'Scratch to reveal 🥰',
+        'about.scratch.3': 'Nice to meet you 🥳',
+        'about.kw.art': 'Abstraction',
+        'about.kw.physical': 'Delivery',
+        'about.kw.digital': 'Outcomes',
+        'about.kw.business': 'English',
+        'about.story.art': 'I learn fast and abstract complex AI/business logic into shippable requirements—20+ PRDs/specs, plus high-fidelity prototypes built with HTML/CSS for alignment.',
+        'about.story.physical': 'I’ve helped deliver 10+ projects end-to-end: breakdown, prioritization, version planning, and cross-team execution with engineering & QA.',
+        'about.story.digital': 'Result-oriented: drove 50+ optimizations (flows, translation, product details) to improve stability and usability, and I track impact with clear metrics.',
+        'about.story.business': 'Comfortable working in English, I turn stakeholder feedback into concrete tickets, acceptance criteria, and release plans.',
+        'about.cards.creativity.l1': 'End-to-end',
+        'about.cards.creativity.l2': 'Delivery',
+        'about.cards.creativity.body': 'Own the loop: PRD → prototype (HTML/CSS) → dev handoff → QA regression → launch follow-up.',
+        'about.cards.logic.l1': 'Clear',
+        'about.cards.logic.l2': 'Specs',
+        'about.cards.logic.body': 'Turn fuzzy requests into priorities, edge cases, acceptance criteria, and executable tickets that dev & QA can agree on.',
+        'about.cards.systems.l1': 'Systems',
+        'about.cards.systems.l2': 'Thinking',
+        'about.cards.systems.body': 'Model workflows, roles, data, and integrations—especially when AI/complex logic needs to be made testable and maintainable.',
+        'about.cards.collab.l1': 'English',
+        'about.cards.collab.l2': 'Collaboration',
+        'about.cards.collab.body': 'Communicate clearly with cross-functional teams and English-speaking stakeholders, keeping updates frequent and decisions explicit.',
+
+        'contact.title': "Let’s Connect",
+        'contact.body': 'I’m Fay Yang (杨丰毓), a product trainee focused on end-to-end delivery—requirements, cross-team coordination, QA, and launch support. If you’re hiring for product/PM roles, I’d love to chat.',
+        'contact.wechat': 'WeChat: potato0com',
+        'contact.tag.journey': 'REQUIREMENTS',
+        'contact.tag.problem': 'PROBLEM FRAMING',
+        'contact.tag.figma': 'FIGMA',
+        'contact.tag.basic': 'ENGLISH COMMUNICATION',
+        'contact.tag.framer': 'PROTOTYPING',
+        'contact.tag.usability': 'UAT & TESTING',
+        'contact.tag.adobe': 'DOCUMENTATION',
+        'contact.tag.rhino': 'API INTEGRATION',
+        'contact.tag.designSystems': 'SYSTEMS THINKING',
+        'contact.tag.wireframes': 'WIREFRAMES',
+        'contact.tag.taskFlows': 'TASK FLOWS',
+        'contact.tag.prototyping': 'RELEASE PLANNING',
+        'contact.tag.competitive': 'EDGE CASES',
+        'contact.tag.userResearch': 'USER FEEDBACK',
+        'contact.tag.stakeholder': 'CROSS-TEAM COMMUNICATION',
+        'contact.tag.responsive': 'MOBILE / WEB',
+        'contact.tag.accessibility': 'LOCALIZATION',
+        'contact.tag.uxStructure': 'ACCEPTANCE CRITERIA',
+        'contact.tag.html': 'HTML',
+        'contact.tag.service': 'PROCESS MAPPING',
+        'contact.tag.story': 'CLEAR WRITING',
+        'contact.tag.max': 'BUG TRIAGE',
+      },
+      zh: {
+        'meta.title': '杨丰毓 Fay | 简介',
+        'brand.logo': '杨丰毓',
+        'nav.work': '作品',
+        'nav.about': '关于',
+        'nav.contact': '联系',
+        'lang.label': '语言',
+        'lang.menuTitle': '语言：',
+        'lang.zh': '中文',
+        'lang.en': '英文',
+        'hero.a': '系统拆解者。',
+        'hero.b': '把模型变成体验。',
+        'hero.c': '用数据驱动迭代。',
+
+        'work.title': '精选作品',
+        'work.p1.title': '服务器与数据库价格查询工具（自研）',
+        'work.p1.lead': '如何把多云报价的人工整理时间减少约 80%（30 分钟→6 分钟），并做到可筛选可对比？',
+        'work.p1.tag1': '报价自动化',
+        'work.p1.tag2': '多云比价',
+        'work.p1.tag3': '推荐方案',
+        'work.p1.body': '角色：我识别并主导推动“多云报价低效”问题的工具化改造，从人工查询整理转为自动查询比价。交付物：对接多家云厂商价格接口（API），支持规格/厂商筛选、自动比价，并输出标准化报价模板与对比/推荐方案视图。结果：将单次报价准备时间从约 30 分钟缩短到约 6 分钟（约 80% 提效），并在团队内推广使用。背景：此前需要逐个查询阿里云/华为云/腾讯云等云厂商价格，再手动整理规格与价格并填写报价表。',
+
+        'work.p2.title': '树木档案管理系统（扫码公开查询）',
+        'work.p2.lead': '把 Excel 管理升级为 Web+手机端：建档/巡检/养护留痕，并支持市民扫码查询（168 棵树）。',
+        'work.p2.tag1': 'Web+移动端',
+        'work.p2.tag2': '扫码公开页',
+        'work.p2.tag3': '权限/审计',
+        'work.p2.body': '角色：作为产品管培生（2025.12–2026.02），我独立完成该系统的端到端交付。交付物：Web+手机端的建档/检索、巡检与养护留痕、二维码生成与下载、角色权限与审计日志，以及面向市民的“无需登录扫码查询”公开页。结果：替代 Excel 管理，提升现场使用效率；覆盖 168 棵树的数据；部署上线由甲方团队接手。',
+
+        'work.p3.title': '绿地碳汇计量核算系统',
+        'work.p3.lead': '数据导入校验 → 高精度计算 → 地图可视化 → 报告导出（83 样地 / 17 区域）。',
+        'work.p3.tag1': '数据校验',
+        'work.p3.tag2': '公式/参数核验',
+        'work.p3.tag3': '地图/报告',
+        'work.p3.body': '角色：作为产品管培生，我独立搭建并迭代碳汇计量核算闭环，确保规则清晰、可复核、可验收。交付物：Excel 导入与完整性/规则校验、按树种差异化参数的高精度计算与参数核验、结果追溯复算、地图可视化、报告导出。结果：覆盖 83 个样地、17 个区域，用于项目申报材料；部署上线由甲方团队接手。',
+
+        'work.p4.title': '墨西哥 ERP 系统稳定性保障',
+        'work.p4.lead': '在项目交付过程中，如何快速补齐测试覆盖、推进缺陷闭环并提升回归效率？',
+        'work.p4.tag1': '测试用例/回归',
+        'work.p4.tag2': 'Bug 跟进',
+        'work.p4.tag3': '翻译/排版',
+        'work.p4.body': '角色：我参与墨西哥 ERP 的测试与稳定性保障（2025.11–2026.02），主要负责补齐测试覆盖并推进缺陷闭环。交付物：30+ 测试用例、核心流程回归检查、问题复现与修复验证记录、缺陷跟进台账。结果：推动 183 个 bug 关闭；平均回归周期约 2 天→1 天；回归轮次 3 轮→2 轮；问题覆盖功能缺陷、翻译/本地化与 UI 排版等。',
+
+        'work.p5.title': '外卖 APP 项目（Android / iOS）',
+        'work.p5.lead': '如何把客户需求拆成可落地的多端流程：菜单 → 购物车 → 支付 → 自取/外卖？',
+        'work.p5.tag1': '需求澄清',
+        'work.p5.tag2': '全英文沟通',
+        'work.p5.tag3': '支付/配送流程',
+        'work.p5.body': '角色：我参与海外外卖 App（Android/iOS，2025.05–2025.07）交付，负责与客户全英文沟通并推进需求澄清到落地。交付物：将需求拆解成研发可执行的流程与边界规则（菜单→购物车→支付→自取/外卖），并补齐定位/地址的常见规则（地址簿、定位授权兜底、配送范围校验、失败/超区提示引导）。结果：提升跨团队对齐效率，推动项目按期上线交付；核心模块包含菜单浏览、菜品详情、购物车、第三方支付（PayPal / Stripe）与定位地址流程。',
+
+        'about.title': '关于我：产品与交付',
+        'about.scratch.1': '嗨，我是 Fay ✨',
+        'about.scratch.2': '刮开看看我 🥰',
+        'about.scratch.3': '很高兴认识你 🥳',
+        'about.kw.art': '抽象',
+        'about.kw.physical': '推进',
+        'about.kw.digital': '结果',
+        'about.kw.business': '英文',
+        'about.story.art': '学习快、抽象能力强：能理解 AI 与复杂业务逻辑并转成可落地方案；累计输出 20+ 需求文档，并用 HTML/CSS 做高保真原型用于对齐。',
+        'about.story.physical': '项目推进：参与 10+ 项目交付，负责需求拆解、优先级评估与版本规划，推动开发/测试协同并跟进闭环。',
+        'about.story.digital': '结果导向：累计推动 50+ 问题优化（流程配置/翻译/功能细节），提升系统稳定性与可用性，并用数据记录改进效果。',
+        'about.story.business': '跨团队与全英文沟通：能与海外客户/跨文化干系人对齐目标，把反馈转成验收标准与可执行任务。',
+        'about.cards.creativity.l1': '端到端',
+        'about.cards.creativity.l2': '交付',
+        'about.cards.creativity.body': '从 PRD 到原型（HTML/CSS）再到对接与回归，我把交付闭环跑完。',
+        'about.cards.logic.l1': '清晰',
+        'about.cards.logic.l2': '规格',
+        'about.cards.logic.body': '把模糊需求转成优先级、异常场景、验收标准与可执行任务，让研发/测试对齐。',
+        'about.cards.systems.l1': '系统',
+        'about.cards.systems.l2': '思维',
+        'about.cards.systems.body': '把流程、角色权限、数据与接口串起来，尤其在 AI/复杂逻辑下做到可测试、可维护。',
+        'about.cards.collab.l1': '英文',
+        'about.cards.collab.l2': '协作',
+        'about.cards.collab.body': '与跨团队/全英文干系人保持高频沟通，把决策与变更说清楚、落到执行。',
+
+        'contact.title': '欢迎联系',
+        'contact.body': '我是杨丰毓 Fay（产品管培生），擅长端到端交付：需求拆解、跨团队对齐、测试回归与上线支持。欢迎通过邮箱或微信联系。',
+        'contact.wechat': '微信：potato0com',
+        'contact.tag.journey': '需求拆解',
+        'contact.tag.problem': '问题定义',
+        'contact.tag.figma': 'Figma',
+        'contact.tag.basic': '全英文沟通',
+        'contact.tag.framer': '原型设计',
+        'contact.tag.usability': 'UAT/测试',
+        'contact.tag.adobe': '文档沉淀',
+        'contact.tag.rhino': 'API 对接',
+        'contact.tag.designSystems': '系统思维',
+        'contact.tag.wireframes': '线框图',
+        'contact.tag.taskFlows': '任务流程',
+        'contact.tag.prototyping': '版本规划',
+        'contact.tag.competitive': '异常场景',
+        'contact.tag.userResearch': '用户反馈',
+        'contact.tag.stakeholder': '跨团队沟通',
+        'contact.tag.responsive': '移动端/Web',
+        'contact.tag.accessibility': '本地化',
+        'contact.tag.uxStructure': '验收标准',
+        'contact.tag.html': 'HTML',
+        'contact.tag.service': '流程梳理',
+        'contact.tag.story': '清晰表达',
+        'contact.tag.max': 'Bug 跟进',
+      },
+    };
+
+    function getInitialLang() {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved === 'en' || saved === 'zh') return saved;
+      const navLang = (navigator.language || '').toLowerCase();
+      if (navLang.startsWith('zh')) return 'zh';
+      return 'en';
+    }
+
+    function applyLang(lang) {
+      const dict = I18N[lang] || I18N.en;
+      document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+      document.title = dict['meta.title'] || document.title;
+
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        const val = dict[key];
+        if (typeof val === 'string') el.textContent = val;
+      });
+
+      document.querySelectorAll('.lang-option').forEach((btn) => {
+        const selected = btn.getAttribute('data-lang') === lang;
+        btn.setAttribute('aria-selected', selected ? 'true' : 'false');
+      });
+    }
+
+    const CURRENT_LANG = getInitialLang();
+    applyLang(CURRENT_LANG);
+
+    // Language dropdown behavior
+    (function initLangDropdown() {
+      const dropdown = document.getElementById('langDropdown');
+      const btn = document.getElementById('langBtn');
+      const menu = document.getElementById('langMenu');
+      if (!dropdown || !btn || !menu) return;
+
+      function setOpen(open) {
+        dropdown.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
+      function isOpen() {
+        return dropdown.classList.contains('open');
+      }
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setOpen(!isOpen());
+      });
+
+      menu.addEventListener('click', (e) => {
+        const opt = e.target && e.target.closest ? e.target.closest('.lang-option') : null;
+        if (!opt) return;
+        const next = opt.getAttribute('data-lang');
+        if (next !== 'en' && next !== 'zh') return;
+        localStorage.setItem(LANG_KEY, next);
+        // Reload to keep physics tag sizes & layout consistent across languages
+        window.location.reload();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!isOpen()) return;
+        if (dropdown.contains(e.target)) return;
+        setOpen(false);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!isOpen()) return;
+        setOpen(false);
+        btn.focus();
+      });
+    })();
+
+    // 聚光灯动效
+    const spotlight = document.getElementById('spotlight');
+    const hero = document.querySelector('.hero');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let heroTargetX = 0;
+    let heroTargetY = 0;
+    let heroRaf = null;
+
+    function clamp(n, min, max) {
+      return Math.max(min, Math.min(max, n));
+    }
+
+    function flushHeroVars() {
+      heroRaf = null;
+      if (!hero) return;
+      hero.style.setProperty('--hero-x', `${heroTargetX}px`);
+      hero.style.setProperty('--hero-y', `${heroTargetY}px`);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      spotlight.style.left = `${e.clientX}px`;
+      spotlight.style.top = `${e.clientY}px`;
+
+      if (reduceMotion || !hero) return;
+      const rect = hero.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const rx = (e.clientX - cx) / Math.max(1, rect.width);
+      const ry = (e.clientY - cy) / Math.max(1, rect.height);
+      const max = 8;
+      heroTargetX = clamp(rx, -0.5, 0.5) * max * 2;
+      heroTargetY = clamp(ry, -0.5, 0.5) * max * 2;
+      if (!heroRaf) heroRaf = requestAnimationFrame(flushHeroVars);
+    });
+
+    if (hero && !reduceMotion) {
+      hero.addEventListener('mouseleave', () => {
+        heroTargetX = 0;
+        heroTargetY = 0;
+        if (!heroRaf) heroRaf = requestAnimationFrame(flushHeroVars);
+      });
+    }
+
+    // 关键词点击显示内容
+    function showContent(id) {
+      const contents = document.querySelectorAll('.keyword-content');
+      contents.forEach((content) => content.classList.remove('active'));
+      const active = document.getElementById(id);
+      if (active) active.classList.add('active');
+
+      const keywords = document.querySelectorAll('.keyword');
+      keywords.forEach((k) => {
+        k.classList.toggle('active', k.getAttribute('data-content') === id);
+      });
+    }
+
+    // 默认显示第一项
+    showContent('art');
+
+    // 刮刮乐效果（canvas 可擦除涂层）
+    function initScratchCards() {
+      const cards = document.querySelectorAll('.scratch-card');
+
+      cards.forEach((card) => {
+        const canvas = card.querySelector('canvas.scratch-layer');
+        const label = card.querySelector('span');
+        if (!canvas) return;
+
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (!ctx) return;
+
+        let isDrawing = false;
+        const brushRadius = 18;
+        const clearThreshold = 0.55;
+
+        function drawSilverLayer(width, height) {
+          // base metallic gradient
+          const grad = ctx.createLinearGradient(0, 0, width, height);
+          grad.addColorStop(0, '#f2f2f2');
+          grad.addColorStop(0.2, '#cfcfcf');
+          grad.addColorStop(0.5, '#f7f7f7');
+          grad.addColorStop(0.8, '#b9b9b9');
+          grad.addColorStop(1, '#e6e6e6');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, width, height);
+
+          // subtle highlight streaks
+          ctx.save();
+          ctx.globalAlpha = 0.18;
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 2;
+          for (let i = -height; i < width * 1.5; i += 18) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i + height, height);
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // grain noise (drawn at low resolution then scaled)
+          const noiseScale = 0.25;
+          const nw = Math.max(1, Math.floor(width * noiseScale));
+          const nh = Math.max(1, Math.floor(height * noiseScale));
+          const noiseCanvas = document.createElement('canvas');
+          noiseCanvas.width = nw;
+          noiseCanvas.height = nh;
+          const nctx = noiseCanvas.getContext('2d');
+          if (nctx) {
+            const img = nctx.createImageData(nw, nh);
+            const d = img.data;
+            for (let i = 0; i < d.length; i += 4) {
+              // centered-ish noise; keep it subtle
+              const v = 190 + Math.floor((Math.random() - 0.5) * 90);
+              d[i] = v;
+              d[i + 1] = v;
+              d[i + 2] = v;
+              d[i + 3] = 70; // alpha
+            }
+            nctx.putImageData(img, 0, 0);
+            ctx.save();
+            ctx.globalAlpha = 0.35;
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(noiseCanvas, 0, 0, nw, nh, 0, 0, width, height);
+            ctx.restore();
+          }
+
+          // a few darker speckles for texture depth
+          ctx.save();
+          ctx.globalAlpha = 0.22;
+          for (let i = 0; i < 120; i += 1) {
+            const x = Math.random() * width;
+            const y = Math.random() * height;
+            const r = 0.6 + Math.random() * 1.4;
+            ctx.fillStyle = Math.random() > 0.5 ? '#9f9f9f' : '#7f7f7f';
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        function resizeCanvas() {
+          const rect = card.getBoundingClientRect();
+          const dpr = window.devicePixelRatio || 1;
+
+          canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+          canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.globalCompositeOperation = 'source-over';
+          drawSilverLayer(rect.width, rect.height);
+        }
+
+        function getLocalPoint(e) {
+          const rect = canvas.getBoundingClientRect();
+          return {
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+          };
+        }
+
+        function scratchAt(x, y) {
+          ctx.globalCompositeOperation = 'destination-out';
+          ctx.beginPath();
+          ctx.arc(x, y, brushRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        function clearedRatio() {
+          const w = canvas.width;
+          const h = canvas.height;
+          const imageData = ctx.getImageData(0, 0, w, h);
+          const data = imageData.data;
+
+          let cleared = 0;
+          for (let i = 3; i < data.length; i += 4) {
+            if (data[i] === 0) cleared += 1;
+          }
+          return cleared / (w * h);
+        }
+
+        function maybeFinish() {
+          // 只有在用户松手后检查，避免频繁 getImageData
+          const ratio = clearedRatio();
+          if (ratio >= clearThreshold) {
+            canvas.remove();
+            if (label) label.style.display = 'none';
+          }
+        }
+
+        canvas.addEventListener('pointerdown', (e) => {
+          isDrawing = true;
+          canvas.setPointerCapture(e.pointerId);
+          const p = getLocalPoint(e);
+          scratchAt(p.x, p.y);
+        });
+
+        canvas.addEventListener('pointermove', (e) => {
+          if (!isDrawing) return;
+          const p = getLocalPoint(e);
+          scratchAt(p.x, p.y);
+        });
+
+        canvas.addEventListener('pointerup', (e) => {
+          isDrawing = false;
+          try {
+            canvas.releasePointerCapture(e.pointerId);
+          } catch (_) {
+            // ignore
+          }
+          maybeFinish();
+        });
+
+        canvas.addEventListener('pointercancel', () => {
+          isDrawing = false;
+        });
+
+        resizeCanvas();
+        window.addEventListener('resize', () => {
+          // 卡片尺寸通常固定；这里做一次保险处理
+          if (card.contains(canvas)) resizeCanvas();
+        });
+      });
+    }
+
+    initScratchCards();
+
+    // Contact - eye follow (for pill eyes)
+    const pillPupils = Array.from(document.querySelectorAll('.pill-pupil'));
+
+    document.addEventListener('mousemove', (e) => {
+      pillPupils.forEach((pupil) => {
+        const eye = pupil.parentElement;
+        if (!eye) return;
+
+        const rect = eye.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const max = rect.width / 2 - pupil.offsetWidth / 2 - 1;
+        const scale = Math.min(1, dist / Math.max(1, max));
+        const angle = Math.atan2(dy, dx);
+        const ox = Math.cos(angle) * max * scale;
+        const oy = Math.sin(angle) * max * scale;
+        pupil.style.transform = `translate(-50%, -50%) translate(${ox}px, ${oy}px)`;
+      });
+    });
+  </script>
+
+  <script>
+    // Contact - physics tags (Matter.js)
+    function initContactPhysics() {
+      const container = document.getElementById('tagPhysics');
+      if (!container || !window.Matter) return;
+
+      container.classList.add('physics-on');
+
+      const {
+        Engine,
+        World,
+        Bodies,
+        Body,
+        Composite,
+        Constraint,
+      } = Matter;
+
+      let engine;
+      let rafId;
+      let tagBodies = [];
+      let walls = [];
+      let activeConstraint = null;
+      let pointerId = null;
+
+      const pointer = { x: 0, y: 0, active: false };
+      const hoverKickCooldownMs = 140;
+      const lastKickAt = new Map();
+
+      function destroyWorld() {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+        tagBodies = [];
+        walls = [];
+        activeConstraint = null;
+        pointerId = null;
+      }
+
+      function buildWorld() {
+        destroyWorld();
+        engine = Engine.create();
+        engine.gravity.y = 1.15;
+        engine.gravity.scale = 0.0012;
+
+        const rect = container.getBoundingClientRect();
+        const w = Math.max(1, rect.width);
+        const h = Math.max(1, rect.height);
+
+        const thickness = 80;
+        const floor = Bodies.rectangle(w / 2, h + thickness / 2, w + thickness * 2, thickness, { isStatic: true });
+        const ceiling = Bodies.rectangle(w / 2, -thickness / 2, w + thickness * 2, thickness, { isStatic: true });
+        const left = Bodies.rectangle(-thickness / 2, h / 2, thickness, h + thickness * 2, { isStatic: true });
+        const right = Bodies.rectangle(w + thickness / 2, h / 2, thickness, h + thickness * 2, { isStatic: true });
+        walls = [floor, ceiling, left, right];
+
+        World.add(engine.world, [...walls]);
+
+        const chips = Array.from(container.querySelectorAll('.tag-chip'));
+        const bodies = chips.map((chip, i) => {
+          const cw = chip.offsetWidth || 120;
+          const ch = chip.offsetHeight || 34;
+
+          // Spawn as a bottom pile centered in the container
+          const x = w / 2 + (Math.random() - 0.5) * Math.min(260, w * 0.7);
+          const y = h - 40 - Math.random() * 40;
+          const body = Bodies.rectangle(
+            Math.min(w - 60, x),
+            Math.min(h - 80, y),
+            cw,
+            ch,
+            {
+              restitution: 0.42,
+              friction: 0.08,
+              frictionAir: 0.018,
+              chamfer: { radius: Math.min(18, Math.floor(ch / 2)) },
+            }
+          );
+          Body.setAngle(body, (Math.random() - 0.5) * 0.7);
+          chip.dataset.bodyId = String(body.id);
+          return body;
+        });
+        tagBodies = bodies;
+        World.add(engine.world, bodies);
+
+      }
+
+      function applyPointerRepulsion() {
+        if (!pointer.active) return;
+        const radius = 110;
+        const strength = 0.00002;
+
+        tagBodies.forEach((body) => {
+          const dx = body.position.x - pointer.x;
+          const dy = body.position.y - pointer.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist <= 0.001 || dist > radius) return;
+
+          const nx = dx / dist;
+          const ny = dy / dist;
+          const falloff = 1 - dist / radius;
+          Matter.Body.applyForce(body, body.position, {
+            x: nx * strength * falloff,
+            y: (ny * strength * falloff) - (0.000012 * falloff),
+          });
+        });
+      }
+
+      function updateDom() {
+        const chips = Array.from(container.querySelectorAll('.tag-chip'));
+        const map = new Map(tagBodies.map((b) => [String(b.id), b]));
+        chips.forEach((chip) => {
+          const body = map.get(chip.dataset.bodyId);
+          if (!body) return;
+          const x = body.position.x - chip.offsetWidth / 2;
+          const y = body.position.y - chip.offsetHeight / 2;
+          chip.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${body.angle}rad)`;
+        });
+      }
+
+      function step() {
+        applyPointerRepulsion();
+        Matter.Engine.update(engine, 1000 / 60);
+        updateDom();
+        rafId = requestAnimationFrame(step);
+      }
+
+      function worldPointFromEvent(e) {
+        const r = container.getBoundingClientRect();
+        return {
+          x: e.clientX - r.left,
+          y: e.clientY - r.top,
+        };
+      }
+
+      function findBodyForChip(chip) {
+        const id = chip?.dataset?.bodyId;
+        if (!id) return null;
+        return tagBodies.find((b) => String(b.id) === id) || null;
+      }
+
+      function attachDrag(body, point) {
+        activeConstraint = Constraint.create({
+          pointA: point,
+          bodyB: body,
+          pointB: { x: 0, y: 0 },
+          stiffness: 0.18,
+          damping: 0.12,
+        });
+        Composite.add(engine.world, activeConstraint);
+      }
+
+      function detachDrag() {
+        if (activeConstraint) {
+          Composite.remove(engine.world, activeConstraint);
+        }
+        activeConstraint = null;
+      }
+
+      container.addEventListener('pointerdown', (e) => {
+        const chip = e.target.closest('.tag-chip');
+        if (!chip) return;
+        const body = findBodyForChip(chip);
+        if (!body) return;
+
+        pointerId = e.pointerId;
+        container.setPointerCapture(pointerId);
+        const p = worldPointFromEvent(e);
+        attachDrag(body, { x: p.x, y: p.y });
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        if (!activeConstraint || e.pointerId !== pointerId) return;
+        const p = worldPointFromEvent(e);
+        activeConstraint.pointA.x = p.x;
+        activeConstraint.pointA.y = p.y;
+      });
+
+      container.addEventListener('pointerup', (e) => {
+        if (e.pointerId !== pointerId) return;
+        try {
+          container.releasePointerCapture(pointerId);
+        } catch (_) {
+          // ignore
+        }
+        pointerId = null;
+        detachDrag();
+      });
+
+      container.addEventListener('pointercancel', () => {
+        pointerId = null;
+        detachDrag();
+      });
+
+      // Mouse hover kick (pop up / fling)
+      container.addEventListener('pointerover', (e) => {
+        const chip = e.target.closest('.tag-chip');
+        if (!chip) return;
+        const body = findBodyForChip(chip);
+        if (!body) return;
+
+        const now = Date.now();
+        const last = lastKickAt.get(body.id) || 0;
+        if (now - last < hoverKickCooldownMs) return;
+        lastKickAt.set(body.id, now);
+
+        const kickX = (Math.random() - 0.5) * 0.0007;
+        const kickY = -0.0014 - Math.random() * 0.0008;
+        Matter.Body.applyForce(body, body.position, { x: kickX, y: kickY });
+        Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.9);
+      });
+
+      container.addEventListener('pointermove', (e) => {
+        const p = worldPointFromEvent(e);
+        pointer.x = p.x;
+        pointer.y = p.y;
+        pointer.active = true;
+      });
+
+      container.addEventListener('pointerleave', () => {
+        pointer.active = false;
+      });
+
+      function rebuild() {
+        buildWorld();
+      }
+
+      rebuild();
+      step();
+
+      window.addEventListener('resize', () => {
+        rebuild();
+      });
+    }
+
+    (function loadMatterAndInit() {
+      if (window.Matter) {
+        initContactPhysics();
+        return;
+      }
+
+      function inject(src, onOk, onFail) {
+        const s = document.createElement('script');
+        s.src = src;
+        s.async = true;
+        s.onload = onOk;
+        s.onerror = onFail;
+        document.head.appendChild(s);
+      }
+
+      inject(
+        'tools/matter.min.js',
+        () => initContactPhysics(),
+        () => {
+          console.warn('[Contact] Failed to load tools/matter.min.js; physics tags disabled.');
+        }
+      );
+    })();
+  </script>
+
+  <script>
+    // Lightbox - open images with a close button (instead of browser image viewer)
+    (function initLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      const closeBtn = document.getElementById('lightboxClose');
+      const img = document.getElementById('lightboxImg');
+      const video = document.getElementById('lightboxVideo');
+      const speed = document.getElementById('lightboxSpeed');
+      if (!lightbox || !closeBtn || !img) return;
+
+      const figure = lightbox.querySelector('.lightbox-figure');
+
+      let lastFocused = null;
+      let playbackRate = 1;
+
+      if (speed) {
+        speed.addEventListener('change', () => {
+          const next = Number(speed.value);
+          playbackRate = Number.isFinite(next) && next > 0 ? next : 1;
+          if (video && !video.hidden) {
+            try {
+              video.playbackRate = playbackRate;
+            } catch (_) {
+              // ignore
+            }
+          }
+        });
+      }
+
+      function openLightbox(url, altText, type) {
+        lastFocused = document.activeElement;
+        const t = type || 'image';
+
+        if (figure) {
+          figure.scrollTop = 0;
+          figure.scrollLeft = 0;
+        }
+
+        if (t === 'video' && video) {
+          img.hidden = true;
+          img.src = '';
+          img.alt = '';
+
+          video.hidden = false;
+          video.src = url;
+          video.setAttribute('aria-label', altText || 'Video preview');
+
+          if (speed) {
+            speed.hidden = false;
+            speed.value = String(playbackRate);
+          }
+
+          const applyRate = () => {
+            try {
+              video.playbackRate = playbackRate;
+            } catch (_) {
+              // ignore
+            }
+          };
+          video.addEventListener('loadedmetadata', applyRate, { once: true });
+          applyRate();
+
+          try {
+            video.currentTime = 0;
+          } catch (_) {
+            // ignore
+          }
+          try {
+            const p = video.play();
+            if (p && typeof p.catch === 'function') p.catch(() => {});
+          } catch (_) {
+            // ignore autoplay blocks
+          }
+        } else {
+          if (video) {
+            try { video.pause(); } catch (_) {}
+            video.hidden = true;
+            video.removeAttribute('src');
+            try { video.load(); } catch (_) {}
+          }
+
+          if (speed) speed.hidden = true;
+
+          img.hidden = false;
+          img.src = url;
+          img.alt = altText || '';
+        }
+
+        lightbox.hidden = false;
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        img.src = '';
+        img.alt = '';
+
+        if (video) {
+          try { video.pause(); } catch (_) {}
+          video.hidden = true;
+          video.removeAttribute('src');
+          try { video.load(); } catch (_) {}
+        }
+
+        if (speed) speed.hidden = true;
+
+        document.body.style.overflow = '';
+        if (lastFocused && typeof lastFocused.focus === 'function') {
+          lastFocused.focus();
+        }
+        lastFocused = null;
+      }
+
+      closeBtn.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.hidden) {
+          e.preventDefault();
+          closeLightbox();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a[data-lightbox]');
+        if (!a) return;
+
+        // Capture-phase handler so inline stopPropagation won't block the lightbox.
+        // Also prevents accordion card toggling when users click the image.
+        e.preventDefault();
+        e.stopPropagation();
+
+        const type = a.dataset.lightbox || 'image';
+        const previewImg = a.querySelector('img');
+        const altText = previewImg ? previewImg.getAttribute('alt') : (a.getAttribute('aria-label') || '');
+        openLightbox(a.href, altText, type);
+      }, true);
+    })();
+  </script>
+</body>
+</html>
