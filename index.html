@@ -2359,6 +2359,15 @@
         kickBody(body);
       });
 
+      // Fallback for environments where PointerEvents are flaky (some mobile WebViews)
+      container.addEventListener('click', (e) => {
+        const chip = e.target.closest('.tag-chip');
+        if (!chip) return;
+        const body = findBodyForChip(chip);
+        if (!body) return;
+        kickBody(body);
+      });
+
       container.addEventListener('pointermove', (e) => {
         const p = worldPointFromEvent(e);
         pointer.x = p.x;
@@ -2383,8 +2392,20 @@
     }
 
     (function loadMatterAndInit() {
+      function ensurePhysics() {
+        const container = document.getElementById('tagPhysics');
+        if (!container) return;
+        if (!window.Matter) return;
+        if (container.classList.contains('physics-on')) return;
+        initContactPhysics();
+      }
+
       if (window.Matter) {
         initContactPhysics();
+        window.addEventListener('pageshow', ensurePhysics);
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible') ensurePhysics();
+        });
         return;
       }
 
@@ -2399,7 +2420,13 @@
 
       inject(
         'tools/matter.min.js',
-        () => initContactPhysics(),
+        () => {
+          initContactPhysics();
+          window.addEventListener('pageshow', ensurePhysics);
+          document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') ensurePhysics();
+          });
+        },
         () => {
           console.warn('[Contact] Failed to load tools/matter.min.js; physics tags disabled.');
         }
