@@ -732,6 +732,26 @@
       display: block;
     }
 
+    /* Force-disable any custom cursor (desktop) */
+    @media (hover: hover) and (pointer: fine) {
+      html,
+      body {
+        cursor: auto !important;
+      }
+
+      a,
+      button,
+      [role='button'],
+      .project-card,
+      .keyword {
+        cursor: pointer !important;
+      }
+
+      #lemonCursor {
+        display: none !important;
+      }
+    }
+
     /* About - cards module (hover color change) */
     .about-mod {
       max-width: 1100px;
