@@ -377,11 +377,17 @@
       flex-wrap: wrap;
     }
 
-    .card-hint {
+    .work-hint-wrap {
+      max-width: 1100px;
+      margin: -18px auto 24px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .work-hint {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 12px;
+      justify-content: center;
       padding: 7px 12px;
       border-radius: 999px;
       background: #ffcc00;
@@ -391,10 +397,7 @@
       letter-spacing: 0.01em;
       user-select: none;
       pointer-events: none;
-    }
-
-    .project-card.active .card-hint {
-      display: none;
+      width: fit-content;
     }
 
     .project-tag {
@@ -663,24 +666,6 @@
       justify-content: center;
       margin-bottom: 40px;
       flex-wrap: wrap;
-    }
-
-    .scratch-hint {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin: -12px auto 22px;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: #ffcc00;
-      color: #000;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      user-select: none;
-      pointer-events: none;
-      width: fit-content;
     }
 
     .scratch-card {
@@ -1135,6 +1120,9 @@
   <!-- 项目展示区 - 手风琴卡片 -->
   <section class="projects" id="work">
     <h2 data-i18n="work.title">Project Experience</h2>
+    <div class="work-hint-wrap">
+      <div class="work-hint" data-i18n="work.sectionHint">Click to view project details</div>
+    </div>
     <div class="project-cards">
       <div class="project-card" onclick="this.classList.toggle('active')">
         <h3 data-i18n="work.p1.title">Server & Database Pricing Tool (In-house)</h3>
@@ -1144,7 +1132,6 @@
           <div class="project-tag" data-i18n="work.p1.tag2">Multi-cloud Pricing</div>
           <div class="project-tag" data-i18n="work.p1.tag3">Decision Support</div>
         </div>
-        <div class="card-hint" data-i18n="work.cardHint">Tap to view details ↓</div>
         <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p1.role">Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Previously, sales checked Aliyun/Huawei Cloud/Tencent Cloud pricing page by page and manually filled quote sheets.</p>
@@ -1174,7 +1161,6 @@
           <div class="project-tag" data-i18n="work.p2.tag2">QR Public Lookup</div>
           <div class="project-tag" data-i18n="work.p2.tag3">Audit & Roles</div>
         </div>
-        <div class="card-hint" data-i18n="work.cardHint">Tap to view details ↓</div>
         <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p2.role">Role: As a product trainee, I independently delivered this client system end-to-end.</p>
@@ -1204,7 +1190,6 @@
           <div class="project-tag" data-i18n="work.p3.tag2">Species-specific Formula</div>
           <div class="project-tag" data-i18n="work.p3.tag3">Map & Reporting</div>
         </div>
-        <div class="card-hint" data-i18n="work.cardHint">Tap to view details ↓</div>
         <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p3.role">Role: As a product trainee, I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable.</p>
@@ -1244,7 +1229,6 @@
           <div class="project-tag" data-i18n="work.p4.tag2">Bug Triage</div>
           <div class="project-tag" data-i18n="work.p4.tag3">Localization & UI</div>
         </div>
-        <div class="card-hint" data-i18n="work.cardHint">Tap to view details ↓</div>
         <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p4.role">Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure.</p>
@@ -1268,7 +1252,6 @@
           <div class="project-tag" data-i18n="work.p5.tag2">English Stakeholders</div>
           <div class="project-tag" data-i18n="work.p5.tag3">Payment & Delivery</div>
         </div>
-        <div class="card-hint" data-i18n="work.cardHint">Tap to view details ↓</div>
         <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p5.role">Role: I supported an overseas Android/iOS food delivery app (May–Jul 2025) and owned requirement clarification with English-speaking stakeholders.</p>
@@ -1296,7 +1279,6 @@
   <section class="about" id="about">
     <div class="about-panel">
       <h2 data-i18n="about.title">About: Product & Delivery</h2>
-      <div class="scratch-hint" data-i18n="about.scratchHint">Scratch to reveal ↓</div>
       <div class="scratch-cards">
         <div class="scratch-card">
           <span data-i18n="about.scratch.1">Hi, I’m Fay ✨</span>
@@ -1577,7 +1559,7 @@
         'hero.c': 'Iterate with data.',
 
         'work.title': 'Project Experience',
-        'work.cardHint': 'Tap to view details 👇',
+        'work.sectionHint': 'Click to view project details',
         'work.galleryHint': 'Swipe to see more →',
         'work.p1.title': 'Server & Database Pricing Tool (In-house)',
         'work.p1.lead': 'How can we cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons?',
@@ -1625,7 +1607,6 @@
         'work.p5.outcome': 'Outcome: improved cross-team alignment and helped the project reach launch delivery; core modules covered menu browsing, dish details, cart, payments (PayPal/Stripe), and delivery/pickup address/location flows.',
 
         'about.title': 'About: Product & Delivery',
-        'about.scratchHint': 'Scratch to reveal 👇',
         'about.scratch.1': 'Hi, I’m Fay ✨',
         'about.scratch.2': 'Scratch to reveal 🥰',
         'about.scratch.3': 'Nice to meet you 🥳',
@@ -1691,7 +1672,7 @@
         'hero.c': '用数据驱动迭代。',
 
         'work.title': '项目经验',
-        'work.cardHint': '点我展开详情 👇',
+        'work.sectionHint': '点击可查看项目详情',
         'work.galleryHint': '左右滑动查看更多 →',
         'work.p1.title': '服务器与数据库价格查询工具（自研）',
         'work.p1.lead': '如何把多云报价的人工整理时间减少约 80%（30 分钟→6 分钟），并做到可筛选可对比？',
@@ -1739,7 +1720,6 @@
         'work.p5.outcome': '结果：提升跨团队对齐效率，推动项目按期上线交付；核心模块包含菜单浏览、菜品详情、购物车、第三方支付（PayPal / Stripe）与定位地址流程。',
 
         'about.title': '关于我：产品与交付',
-        'about.scratchHint': '刮开刮刮乐看看我 👇',
         'about.scratch.1': '嗨，我是 Fay ✨',
         'about.scratch.2': '刮开看看我 🥰',
         'about.scratch.3': '很高兴认识你 🥳',
