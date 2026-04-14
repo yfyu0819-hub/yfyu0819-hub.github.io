@@ -18,6 +18,28 @@
       color: #000;
     }
 
+    @media (hover: hover) and (pointer: fine) {
+      :root {
+        --cursor-lemon: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='32'%20viewBox='0%200%2032%2032'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23ffeab3'/%3E%3Cstop%20offset='1'%20stop-color='%23ffd98a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg%20transform='translate(16%2016)%20rotate(-18)%20translate(-16%20-16)'%3E%3Cellipse%20cx='16'%20cy='16'%20rx='10.5'%20ry='7.5'%20fill='url(%23g)'%20stroke='rgba(0,0,0,0.35)'%20stroke-width='1'/%3E%3Ccircle%20cx='12'%20cy='15'%20r='1.2'%20fill='rgba(255,255,255,0.55)'/%3E%3C/g%3E%3C/svg%3E") 10 10, auto;
+      }
+
+      html,
+      body,
+      a,
+      button,
+      [role='button'],
+      .project-card,
+      .project-gallery a,
+      .keyword,
+      .lang-toggle,
+      .lang-option,
+      .project-gallery img,
+      .project-gallery video,
+      .project-video-thumb img {
+        cursor: var(--cursor-lemon);
+      }
+    }
+
     /* 1. 导航栏 */
     nav {
       position: fixed;
@@ -272,8 +294,8 @@
       position: absolute;
       width: 100px;
       height: 100px;
-      border-radius: 50%;
-      background-color: rgba(255, 204, 0, 0.2);
+      border-radius: 65% 35% 60% 40% / 55% 45% 55% 45%;
+      background: linear-gradient(180deg, #ffeab3 0%, #ffd98a 100%);
       animation: float 6s infinite ease-in-out;
     }
 
@@ -300,13 +322,84 @@
     /* 聚光灯效果 */
     .spotlight {
       position: absolute;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.8), transparent 70%);
+      width: 84px;
+      height: 62px;
+      border-radius: 65% 35% 60% 40% / 55% 45% 55% 45%;
+      background: radial-gradient(60% 60% at 30% 30%, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0) 45%),
+        linear-gradient(180deg, rgba(255, 234, 179, 0.86) 0%, rgba(255, 217, 138, 0.86) 100%);
+      box-shadow: 0 8px 22px rgba(255, 217, 138, 0.18);
+      filter: blur(2px);
       pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) rotate(-18deg);
       will-change: left, top;
+    }
+
+    .spotlight::before {
+      content: '';
+      position: absolute;
+      inset: 10px 14px 12px 16px;
+      border-radius: 60% 40% 55% 45% / 50% 50% 50% 50%;
+      background: radial-gradient(70% 80% at 25% 25%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 65%);
+      opacity: 0.9;
+    }
+
+    .spotlight::after {
+      content: '';
+      position: absolute;
+      width: 18px;
+      height: 12px;
+      left: 56px;
+      top: -6px;
+      border-radius: 70% 30% 70% 30% / 60% 40% 60% 40%;
+      background: linear-gradient(180deg, rgba(255, 234, 179, 0.9) 0%, rgba(255, 217, 138, 0.75) 100%);
+      transform: rotate(22deg);
+      opacity: 0.9;
+    }
+
+    /* Lemon cursor (desktop only) */
+    #lemonCursor {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 22px;
+      height: 16px;
+      border-radius: 65% 35% 60% 40% / 55% 45% 55% 45%;
+      background: radial-gradient(60% 60% at 30% 30%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 50%),
+        linear-gradient(180deg, rgba(255, 234, 179, 0.95) 0%, rgba(255, 217, 138, 0.95) 100%);
+      box-shadow: 0 8px 18px rgba(255, 217, 138, 0.22);
+      transform: translate(-50%, -50%) rotate(-18deg);
+      pointer-events: none;
+      z-index: 9999;
+      display: none;
+      will-change: left, top;
+    }
+
+    #lemonCursor::after {
+      content: '';
+      position: absolute;
+      width: 7px;
+      height: 5px;
+      left: 14px;
+      top: -3px;
+      border-radius: 70% 30% 70% 30% / 60% 40% 60% 40%;
+      background: linear-gradient(180deg, rgba(255, 234, 179, 0.95) 0%, rgba(255, 217, 138, 0.82) 100%);
+      transform: rotate(20deg);
+      opacity: 0.9;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      body {
+        cursor: none;
+      }
+
+      a,
+      button {
+        cursor: none;
+      }
+
+      #lemonCursor {
+        display: block;
+      }
     }
 
     /* 3. 项目展示区 - 手风琴卡片 */
@@ -349,6 +442,26 @@
 
     .project-card p {
       margin-bottom: 15px;
+    }
+
+    .card-content .project-points p {
+      margin-bottom: 10px;
+    }
+
+    .card-content .project-points p:last-child {
+      margin-bottom: 0;
+    }
+
+    .gallery-hint {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .gallery-hint {
+        display: none;
+      }
     }
 
     .project-tags {
@@ -1058,11 +1171,12 @@
     <div class="decor decor-1"></div>
     <div class="decor decor-2"></div>
     <div class="spotlight" id="spotlight"></div>
+    <div id="lemonCursor" aria-hidden="true"></div>
   </section>
 
   <!-- 项目展示区 - 手风琴卡片 -->
   <section class="projects" id="work">
-    <h2 data-i18n="work.title">Selected Works</h2>
+    <h2 data-i18n="work.title">Project Experience</h2>
     <div class="project-cards">
       <div class="project-card" onclick="this.classList.toggle('active')">
         <h3 data-i18n="work.p1.title">Server & Database Pricing Tool (In-house)</h3>
@@ -1073,7 +1187,12 @@
           <div class="project-tag" data-i18n="work.p1.tag3">Decision Support</div>
         </div>
         <div class="card-content">
-          <p data-i18n="work.p1.body">Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views. Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team. Sales previously had to check Aliyun, Huawei Cloud, and Tencent Cloud pricing page by page, then manually fill a standard quote sheet and compare specs, pricing, and trade-offs for customers.</p>
+          <div class="project-points">
+            <p data-i18n="work.p1.role">Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Previously, sales checked Aliyun/Huawei Cloud/Tencent Cloud pricing page by page and manually filled quote sheets.</p>
+            <p data-i18n="work.p1.deliverables">Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views.</p>
+            <p data-i18n="work.p1.outcome">Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team.</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 1 images">
             <a href="assets/projects/p1-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
               <img src="assets/projects/p1-1.png" alt="Pricing tool screenshot 1" loading="lazy" />
@@ -1097,7 +1216,12 @@
           <div class="project-tag" data-i18n="work.p2.tag3">Audit & Roles</div>
         </div>
         <div class="card-content">
-          <p data-i18n="work.p2.body">Role: As a product trainee, I independently delivered this client system end-to-end. Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role/audit basics, and a public no-login QR lookup page. Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.</p>
+          <div class="project-points">
+            <p data-i18n="work.p2.role">Role: As a product trainee, I independently delivered this client system end-to-end.</p>
+            <p data-i18n="work.p2.deliverables">Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role/audit basics, and a public no-login QR lookup page.</p>
+            <p data-i18n="work.p2.outcome">Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 2 images">
             <a href="assets/projects/p2-1.jpg" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
               <img src="assets/projects/p2-1.jpg" alt="Project 2 screenshot 1" loading="lazy" />
@@ -1121,7 +1245,12 @@
           <div class="project-tag" data-i18n="work.p3.tag3">Map & Reporting</div>
         </div>
         <div class="card-content">
-          <p data-i18n="work.p3.body">Role: As a product trainee, I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable. Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export. Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.</p>
+          <div class="project-points">
+            <p data-i18n="work.p3.role">Role: As a product trainee, I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable.</p>
+            <p data-i18n="work.p3.deliverables">Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export.</p>
+            <p data-i18n="work.p3.outcome">Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 3 media">
             <a class="project-video-thumb" href="assets/projects/3-5.mp4" target="_blank" rel="noopener" data-lightbox="video" aria-label="Open project video in a new tab" onclick="event.stopPropagation()">
               <img src="assets/projects/3-4.png" alt="Project 3 video thumbnail" loading="lazy" />
@@ -1155,7 +1284,12 @@
           <div class="project-tag" data-i18n="work.p4.tag3">Localization & UI</div>
         </div>
         <div class="card-content">
-          <p data-i18n="work.p4.body">Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure. Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification. Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2. Coverage included functional defects, localization/translation issues, and UI layout inconsistencies.</p>
+          <div class="project-points">
+            <p data-i18n="work.p4.role">Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure.</p>
+            <p data-i18n="work.p4.deliverables">Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification.</p>
+            <p data-i18n="work.p4.outcome">Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2 (functional, localization/translation, and UI layout issues).</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 4 images">
             <a href="assets/projects/4-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
               <img src="assets/projects/4-1.png" alt="Project 4 screenshot 1" loading="lazy" />
@@ -1173,7 +1307,12 @@
           <div class="project-tag" data-i18n="work.p5.tag3">Payment & Delivery</div>
         </div>
         <div class="card-content">
-          <p data-i18n="work.p5.body">Role: I supported an overseas Android/iOS food delivery app and owned requirement clarification with English-speaking stakeholders. Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks. Outcome: improved cross-team alignment and helped the project reach launch delivery. (May–Jul 2025) Core modules included menu browsing, dish details, cart, third-party payment integration (PayPal/Stripe), and pickup vs delivery address/location flows.</p>
+          <div class="project-points">
+            <p data-i18n="work.p5.role">Role: I supported an overseas Android/iOS food delivery app (May–Jul 2025) and owned requirement clarification with English-speaking stakeholders.</p>
+            <p data-i18n="work.p5.deliverables">Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks.</p>
+            <p data-i18n="work.p5.outcome">Outcome: improved cross-team alignment and helped the project reach launch delivery; core modules covered menu browsing, dish details, cart, payments (PayPal/Stripe), and delivery/pickup address/location flows.</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 5 images">
             <a href="assets/projects/5-1.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot 1 in a new tab" onclick="event.stopPropagation()">
               <img src="assets/projects/5-1.png" alt="Project 5 screenshot 1" loading="lazy" />
@@ -1473,41 +1612,52 @@
         'hero.b': 'Turn models into experiences.',
         'hero.c': 'Iterate with data.',
 
-        'work.title': 'Selected Works',
+        'work.title': 'Project Experience',
+        'work.galleryHint': 'Swipe to see more →',
         'work.p1.title': 'Server & Database Pricing Tool (In-house)',
         'work.p1.lead': 'How can we cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons?',
         'work.p1.tag1': 'Quote Automation',
         'work.p1.tag2': 'Multi-cloud Pricing',
         'work.p1.tag3': 'Decision Support',
-        'work.p1.body': 'Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views. Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team. Sales previously had to check Aliyun, Huawei Cloud, and Tencent Cloud pricing page by page, then manually fill a standard quote sheet and compare specs, pricing, and trade-offs for customers.',
+        'work.p1.role': 'Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Previously, sales checked Aliyun/Huawei Cloud/Tencent Cloud pricing page by page and manually filled quote sheets.',
+        'work.p1.deliverables': 'Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views.',
+        'work.p1.outcome': 'Outcome: reduced quote prep time from ~30 minutes to ~6 minutes (~80%) and promoted adoption within the team.',
 
         'work.p2.title': 'Tree Inventory & QR Lookup System',
         'work.p2.lead': 'Replace Excel-based tree management with a web + mobile workflow, plus a public QR page for residents (168 trees).',
         'work.p2.tag1': 'Web + Mobile',
         'work.p2.tag2': 'QR Public Lookup',
         'work.p2.tag3': 'Audit & Roles',
-        'work.p2.body': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently delivered this client system end-to-end. Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role-based access and audit logs, and a public no-login QR page for residents to check basic tree info. Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.',
+        'work.p2.role': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently delivered this client system end-to-end.',
+        'work.p2.deliverables': 'Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role-based access and audit logs, and a public no-login QR page for residents to check basic tree info.',
+        'work.p2.outcome': 'Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.',
 
         'work.p3.title': 'Green Carbon Sink Accounting System',
         'work.p3.lead': 'Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).',
         'work.p3.tag1': 'Data Validation',
         'work.p3.tag2': 'Species-specific Formula',
         'work.p3.tag3': 'Map & Reporting',
-        'work.p3.body': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable. Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export. Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.',
+        'work.p3.role': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently built and iterated the end-to-end accounting workflow, ensuring rules and edge cases were clear and verifiable.',
+        'work.p3.deliverables': 'Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export.',
+        'work.p3.outcome': 'Outcome: supported 83 plots across 17 areas for submission needs; deployment/go-live was handed off to the client team.',
 
         'work.p4.title': 'Mexico ERP System Stabilization',
         'work.p4.lead': 'During delivery, how do we quickly build test coverage, drive bug closure, verify fixes, and speed up regression?',
         'work.p4.tag1': 'QA & Test Cases',
         'work.p4.tag2': 'Bug Triage',
         'work.p4.tag3': 'Localization & UI',
-        'work.p4.body': 'Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure. Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification. Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2. Coverage included functional defects, localization/translation issues, and UI layout inconsistencies.',
+        'work.p4.role': 'Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure.',
+        'work.p4.deliverables': 'Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification.',
+        'work.p4.outcome': 'Outcome: drove 183 bugs to closure; average regression time improved from ~2 days to ~1 day, and regression rounds per release reduced from 3 to 2 (functional, localization/translation, and UI layout issues).',
 
         'work.p5.title': 'Food Delivery App (Android / iOS)',
         'work.p5.lead': 'Turn client needs into shippable cross-platform flows: menu → cart → payment → pickup/delivery.',
         'work.p5.tag1': 'Requirement Clarification',
         'work.p5.tag2': 'English Stakeholders',
         'work.p5.tag3': 'Payment & Delivery',
-        'work.p5.body': 'Role: I supported an overseas Android/iOS food delivery app (May–Jul 2025) and owned requirement clarification with English-speaking stakeholders. Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks. Outcome: improved cross-team alignment and helped the project reach launch delivery. Core modules included menu browsing, dish details, cart, third-party payment integration (PayPal/Stripe), and pickup vs delivery address/location flows.',
+        'work.p5.role': 'Role: I supported an overseas Android/iOS food delivery app (May–Jul 2025) and owned requirement clarification with English-speaking stakeholders.',
+        'work.p5.deliverables': 'Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks.',
+        'work.p5.outcome': 'Outcome: improved cross-team alignment and helped the project reach launch delivery; core modules covered menu browsing, dish details, cart, payments (PayPal/Stripe), and delivery/pickup address/location flows.',
 
         'about.title': 'About: Product & Delivery',
         'about.scratch.1': 'Hi, I’m Fay ✨',
@@ -1574,41 +1724,52 @@
         'hero.b': '把模型变成体验。',
         'hero.c': '用数据驱动迭代。',
 
-        'work.title': '精选作品',
+        'work.title': '项目经验',
+        'work.galleryHint': '左右滑动查看更多 →',
         'work.p1.title': '服务器与数据库价格查询工具（自研）',
         'work.p1.lead': '如何把多云报价的人工整理时间减少约 80%（30 分钟→6 分钟），并做到可筛选可对比？',
         'work.p1.tag1': '报价自动化',
         'work.p1.tag2': '多云比价',
         'work.p1.tag3': '推荐方案',
-        'work.p1.body': '角色：我识别并主导推动“多云报价低效”问题的工具化改造，从人工查询整理转为自动查询比价。交付物：对接多家云厂商价格接口（API），支持规格/厂商筛选、自动比价，并输出标准化报价模板与对比/推荐方案视图。结果：将单次报价准备时间从约 30 分钟缩短到约 6 分钟（约 80% 提效），并在团队内推广使用。背景：此前需要逐个查询阿里云/华为云/腾讯云等云厂商价格，再手动整理规格与价格并填写报价表。',
+        'work.p1.role': '角色：我识别并主导推动“多云报价低效”问题的工具化改造，从人工查询整理转为自动查询比价。背景：此前需要逐个查询阿里云/华为云/腾讯云等云厂商价格，再手动整理规格与价格并填写报价表。',
+        'work.p1.deliverables': '交付物：对接多家云厂商价格接口（API），支持规格/厂商筛选、自动比价，并输出标准化报价模板与对比/推荐方案视图。',
+        'work.p1.outcome': '结果：将单次报价准备时间从约 30 分钟缩短到约 6 分钟（约 80% 提效），并在团队内推广使用。',
 
         'work.p2.title': '树木档案管理系统（扫码公开查询）',
         'work.p2.lead': '把 Excel 管理升级为 Web+手机端：建档/巡检/养护留痕，并支持市民扫码查询（168 棵树）。',
         'work.p2.tag1': 'Web+移动端',
         'work.p2.tag2': '扫码公开页',
         'work.p2.tag3': '权限/审计',
-        'work.p2.body': '角色：作为产品管培生（2025.12–2026.02），我独立完成该系统的端到端交付。交付物：Web+手机端的建档/检索、巡检与养护留痕、二维码生成与下载、角色权限与审计日志，以及面向市民的“无需登录扫码查询”公开页。结果：替代 Excel 管理，提升现场使用效率；覆盖 168 棵树的数据；部署上线由甲方团队接手。',
+        'work.p2.role': '角色：作为产品管培生（2025.12–2026.02），我独立完成该系统的端到端交付。',
+        'work.p2.deliverables': '交付物：Web+手机端的建档/检索、巡检与养护留痕、二维码生成与下载、角色权限与审计日志，以及面向市民的“无需登录扫码查询”公开页。',
+        'work.p2.outcome': '结果：替代 Excel 管理，提升现场使用效率；覆盖 168 棵树的数据；部署上线由甲方团队接手。',
 
         'work.p3.title': '绿地碳汇计量核算系统',
         'work.p3.lead': '数据导入校验 → 高精度计算 → 地图可视化 → 报告导出（83 样地 / 17 区域）。',
         'work.p3.tag1': '数据校验',
         'work.p3.tag2': '公式/参数核验',
         'work.p3.tag3': '地图/报告',
-        'work.p3.body': '角色：作为产品管培生，我独立搭建并迭代碳汇计量核算闭环，确保规则清晰、可复核、可验收。交付物：Excel 导入与完整性/规则校验、按树种差异化参数的高精度计算与参数核验、结果追溯复算、地图可视化、报告导出。结果：覆盖 83 个样地、17 个区域，用于项目申报材料；部署上线由甲方团队接手。',
+        'work.p3.role': '角色：作为产品管培生，我独立搭建并迭代碳汇计量核算闭环，确保规则清晰、可复核、可验收。',
+        'work.p3.deliverables': '交付物：Excel 导入与完整性/规则校验、按树种差异化参数的高精度计算与参数核验、结果追溯复算、地图可视化、报告导出。',
+        'work.p3.outcome': '结果：覆盖 83 个样地、17 个区域，用于项目申报材料；部署上线由甲方团队接手。',
 
         'work.p4.title': '墨西哥 ERP 系统稳定性保障',
         'work.p4.lead': '在项目交付过程中，如何快速补齐测试覆盖、推进缺陷闭环并提升回归效率？',
         'work.p4.tag1': '测试用例/回归',
         'work.p4.tag2': 'Bug 跟进',
         'work.p4.tag3': '翻译/排版',
-        'work.p4.body': '角色：我参与墨西哥 ERP 的测试与稳定性保障（2025.11–2026.02），主要负责补齐测试覆盖并推进缺陷闭环。交付物：30+ 测试用例、核心流程回归检查、问题复现与修复验证记录、缺陷跟进台账。结果：推动 183 个 bug 关闭；平均回归周期约 2 天→1 天；回归轮次 3 轮→2 轮；问题覆盖功能缺陷、翻译/本地化与 UI 排版等。',
+        'work.p4.role': '角色：我参与墨西哥 ERP 的测试与稳定性保障（2025.11–2026.02），主要负责补齐测试覆盖并推进缺陷闭环。',
+        'work.p4.deliverables': '交付物：30+ 测试用例、核心流程回归检查、问题复现与修复验证记录、缺陷跟进台账。',
+        'work.p4.outcome': '结果：推动 183 个 bug 关闭；平均回归周期约 2 天→1 天；回归轮次 3 轮→2 轮；问题覆盖功能缺陷、翻译/本地化与 UI 排版等。',
 
         'work.p5.title': '外卖 APP 项目（Android / iOS）',
         'work.p5.lead': '如何把客户需求拆成可落地的多端流程：菜单 → 购物车 → 支付 → 自取/外卖？',
         'work.p5.tag1': '需求澄清',
         'work.p5.tag2': '全英文沟通',
         'work.p5.tag3': '支付/配送流程',
-        'work.p5.body': '角色：我参与海外外卖 App（Android/iOS，2025.05–2025.07）交付，负责与客户全英文沟通并推进需求澄清到落地。交付物：将需求拆解成研发可执行的流程与边界规则（菜单→购物车→支付→自取/外卖），并补齐定位/地址的常见规则（地址簿、定位授权兜底、配送范围校验、失败/超区提示引导）。结果：提升跨团队对齐效率，推动项目按期上线交付；核心模块包含菜单浏览、菜品详情、购物车、第三方支付（PayPal / Stripe）与定位地址流程。',
+        'work.p5.role': '角色：我参与海外外卖 App（Android/iOS，2025.05–2025.07）交付，负责与客户全英文沟通并推进需求澄清到落地。',
+        'work.p5.deliverables': '交付物：将需求拆解成研发可执行的流程与边界规则（菜单→购物车→支付→自取/外卖），并补齐定位/地址的常见规则（地址簿、定位授权兜底、配送范围校验、失败/超区提示引导）。',
+        'work.p5.outcome': '结果：提升跨团队对齐效率，推动项目按期上线交付；核心模块包含菜单浏览、菜品详情、购物车、第三方支付（PayPal / Stripe）与定位地址流程。',
 
         'about.title': '关于我：产品与交付',
         'about.scratch.1': '嗨，我是 Fay ✨',
@@ -1739,6 +1900,7 @@
 
     // 聚光灯动效
     const spotlight = document.getElementById('spotlight');
+    const lemonCursor = document.getElementById('lemonCursor');
     const hero = document.querySelector('.hero');
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let heroTargetX = 0;
@@ -1757,8 +1919,15 @@
     }
 
     document.addEventListener('mousemove', (e) => {
-      spotlight.style.left = `${e.clientX}px`;
-      spotlight.style.top = `${e.clientY}px`;
+      if (spotlight) {
+        spotlight.style.left = `${e.clientX}px`;
+        spotlight.style.top = `${e.clientY}px`;
+      }
+
+      if (lemonCursor) {
+        lemonCursor.style.left = `${e.clientX}px`;
+        lemonCursor.style.top = `${e.clientY}px`;
+      }
 
       if (reduceMotion || !hero) return;
       const rect = hero.getBoundingClientRect();
@@ -2016,6 +2185,20 @@
       const hoverKickCooldownMs = 140;
       const lastKickAt = new Map();
 
+      function kickBody(body) {
+        const now = Date.now();
+        const last = lastKickAt.get(body.id) || 0;
+        if (now - last < hoverKickCooldownMs) return;
+        lastKickAt.set(body.id, now);
+
+        const kickX = (Math.random() - 0.5) * 0.0007;
+        const kickY = -0.0014 - Math.random() * 0.0008;
+        Matter.Body.applyForce(body, body.position, { x: kickX, y: kickY });
+        Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.9);
+      }
+
+      let tapState = null; // { pointerId, body, startX, startY, dragging }
+
       function destroyWorld() {
         if (rafId) cancelAnimationFrame(rafId);
         rafId = null;
@@ -2023,6 +2206,7 @@
         walls = [];
         activeConstraint = null;
         pointerId = null;
+        tapState = null;
       }
 
       function buildWorld() {
@@ -2154,28 +2338,53 @@
         pointerId = e.pointerId;
         container.setPointerCapture(pointerId);
         const p = worldPointFromEvent(e);
-        attachDrag(body, { x: p.x, y: p.y });
+        tapState = {
+          pointerId,
+          body,
+          startX: p.x,
+          startY: p.y,
+          dragging: false,
+        };
       });
 
       container.addEventListener('pointermove', (e) => {
-        if (!activeConstraint || e.pointerId !== pointerId) return;
+        if (!tapState || e.pointerId !== tapState.pointerId) return;
         const p = worldPointFromEvent(e);
-        activeConstraint.pointA.x = p.x;
-        activeConstraint.pointA.y = p.y;
+
+        const dx = p.x - tapState.startX;
+        const dy = p.y - tapState.startY;
+        const moved = Math.hypot(dx, dy);
+
+        if (!tapState.dragging && moved > 8) {
+          tapState.dragging = true;
+          attachDrag(tapState.body, { x: p.x, y: p.y });
+        }
+
+        if (activeConstraint) {
+          activeConstraint.pointA.x = p.x;
+          activeConstraint.pointA.y = p.y;
+        }
       });
 
       container.addEventListener('pointerup', (e) => {
-        if (e.pointerId !== pointerId) return;
+        if (!tapState || e.pointerId !== tapState.pointerId) return;
+
+        if (!tapState.dragging) {
+          kickBody(tapState.body);
+        }
+
+        tapState = null;
+        detachDrag();
         try {
           container.releasePointerCapture(pointerId);
         } catch (_) {
           // ignore
         }
         pointerId = null;
-        detachDrag();
       });
 
       container.addEventListener('pointercancel', () => {
+        tapState = null;
         pointerId = null;
         detachDrag();
       });
@@ -2187,15 +2396,7 @@
         const body = findBodyForChip(chip);
         if (!body) return;
 
-        const now = Date.now();
-        const last = lastKickAt.get(body.id) || 0;
-        if (now - last < hoverKickCooldownMs) return;
-        lastKickAt.set(body.id, now);
-
-        const kickX = (Math.random() - 0.5) * 0.0007;
-        const kickY = -0.0014 - Math.random() * 0.0008;
-        Matter.Body.applyForce(body, body.position, { x: kickX, y: kickY });
-        Matter.Body.setAngularVelocity(body, (Math.random() - 0.5) * 0.9);
+        kickBody(body);
       });
 
       container.addEventListener('pointermove', (e) => {
