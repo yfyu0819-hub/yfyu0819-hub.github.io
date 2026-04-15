@@ -497,6 +497,7 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+
     .project-video-thumb img {
       height: 240px;
       width: auto;
@@ -1272,6 +1273,39 @@
           </div>
         </div>
       </div>
+
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p6.title">AI Comic Drama Creation Tool (In-house)</h3>
+        <p data-i18n="work.p6.lead">How do we iterate an in-house AI comic drama tool—integrate external models, and reach reliable image/video generation quality for production?</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p6.tag1">Model Integration</div>
+          <div class="project-tag" data-i18n="work.p6.tag2">Image/Video Generation</div>
+          <div class="project-tag" data-i18n="work.p6.tag3">Creator Enablement</div>
+        </div>
+        <div class="card-content">
+          <div class="project-points">
+            <p data-i18n="work.p6.role">Role: I served as product + creator—drove tool UX/workflow optimizations, produced several episodes, and led training on how to use the tool.</p>
+            <p data-i18n="work.p6.deliverables">Deliverables: iteration proposals based on production pain points, external model evaluation & integration requirements for image/video generation, quality checks, plus training materials and workshops.</p>
+            <p data-i18n="work.p6.outcome">Outcome: improved stability and output quality for both image and video generation, and helped the creation team adopt the tool faster for real production.</p>
+          </div>
+          <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
+          <div class="project-gallery" aria-label="Project 6 media">
+            <a class="project-video-thumb" href="assets/projects/6-1-websmall.mp4" target="_blank" rel="noopener" data-lightbox="video" aria-label="Open project video in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/6-3.png" alt="Project 6 video thumbnail" loading="lazy" />
+              <span class="video-badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                  <path d="M8.5 6.7v10.6c0 .8.9 1.3 1.6.9l8.3-5.3c.7-.4.7-1.4 0-1.8l-8.3-5.3c-.7-.4-1.6.1-1.6.9z" />
+                </svg>
+                <span>video</span>
+              </span>
+            </a>
+
+            <a href="assets/projects/6-2.png" target="_blank" rel="noopener" data-lightbox="image" aria-label="Open screenshot in a new tab" onclick="event.stopPropagation()">
+              <img src="assets/projects/6-2.png" alt="Project 6 screenshot" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1606,6 +1640,15 @@
         'work.p5.deliverables': 'Deliverables: implementable specs/solutions with clear flows and edge cases (menu → cart → payment → pickup/delivery), including rules for address book, geolocation permission/fallback, and service-area checks.',
         'work.p5.outcome': 'Outcome: improved cross-team alignment and helped the project reach launch delivery; core modules covered menu browsing, dish details, cart, payments (PayPal/Stripe), and delivery/pickup address/location flows.',
 
+        'work.p6.title': 'AI Comic Drama Creation Tool (In-house)',
+        'work.p6.lead': 'How do we iterate an in-house AI comic drama tool—integrate external models, and reach reliable image/video generation quality for production?',
+        'work.p6.tag1': 'Model Integration',
+        'work.p6.tag2': 'Image/Video Generation',
+        'work.p6.tag3': 'Creator Enablement',
+        'work.p6.role': 'Role: I served as product + creator—drove tool UX/workflow optimizations, produced several episodes, and led training on how to use the tool.',
+        'work.p6.deliverables': 'Deliverables: iteration proposals based on production pain points, external model evaluation & integration requirements for image/video generation, quality checks, plus training materials and workshops.',
+        'work.p6.outcome': 'Outcome: improved stability and output quality for both image and video generation, and helped the creation team adopt the tool faster for real production.',
+
         'about.title': 'About: Product & Delivery',
         'about.scratch.1': 'Hi, I’m Fay ✨',
         'about.scratch.2': 'Scratch to reveal 🥰',
@@ -1718,6 +1761,15 @@
         'work.p5.role': '角色：我参与海外外卖 App（Android/iOS，2025.05–2025.07）交付，负责与客户全英文沟通并推进需求澄清到落地。',
         'work.p5.deliverables': '交付物：将需求拆解成研发可执行的流程与边界规则（菜单→购物车→支付→自取/外卖），并补齐定位/地址的常见规则（地址簿、定位授权兜底、配送范围校验、失败/超区提示引导）。',
         'work.p5.outcome': '结果：提升跨团队对齐效率，推动项目按期上线交付；核心模块包含菜单浏览、菜品详情、购物车、第三方支付（PayPal / Stripe）与定位地址流程。',
+
+        'work.p6.title': 'AI 漫剧制作工具（自研）',
+        'work.p6.lead': '如何迭代自研 AI 漫剧工具：接入外部模型、稳定生图/生视频质量，并支撑创作者完成内容制作？',
+        'work.p6.tag1': '模型接入',
+        'work.p6.tag2': '生图/生视频',
+        'work.p6.tag3': '制作与培训',
+        'work.p6.role': '角色：我同时担任产品与制作，持续推动工具体验与制作流程优化；并实际制作了多集漫剧，负责工具使用培训。',
+        'work.p6.deliverables': '交付物：围绕制作痛点提出并推进迭代需求；外部模型的评估与接入方案（生图/生视频）；输出质量检查要点，以及工具使用培训材料与培训。',
+        'work.p6.outcome': '结果：工具的生图/生视频效果与稳定性逐步提升，创作流程更顺畅，制作团队能更快上手并产出内容。',
 
         'about.title': '关于我：产品与交付',
         'about.scratch.1': '嗨，我是 Fay ✨',
@@ -2481,12 +2533,9 @@
           } catch (_) {
             // ignore
           }
-          try {
-            const p = video.play();
-            if (p && typeof p.catch === 'function') p.catch(() => {});
-          } catch (_) {
-            // ignore autoplay blocks
-          }
+
+          // Do not autoplay: some browsers/WebViews keep audio controls disabled
+          // when playback is started programmatically. Let the user press Play.
         } else {
           if (video) {
             try { video.pause(); } catch (_) {}
