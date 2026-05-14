@@ -355,6 +355,18 @@
       margin-bottom: 10px;
     }
 
+    .project-link a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .project-link a:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
     .card-content .project-points p:last-child {
       margin-bottom: 0;
     }
@@ -1167,6 +1179,9 @@
             <p data-i18n="work.p2.role">Role: As a product trainee, I independently delivered this client system end-to-end.</p>
             <p data-i18n="work.p2.deliverables">Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role/audit basics, and a public no-login QR lookup page.</p>
             <p data-i18n="work.p2.outcome">Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.</p>
+            <p class="project-link" onclick="event.stopPropagation()"><span data-i18n="work.p2.liveLabel">Live site:</span>
+              <a href="http://39.103.204.41:3000/" target="_blank" rel="noopener" onclick="event.stopPropagation()">http://39.103.204.41:3000/</a>
+            </p>
           </div>
           <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 2 images">
@@ -1612,6 +1627,7 @@
         'work.p2.role': 'Role: As a product trainee (Dec 2025–Feb 2026), I independently delivered this client system end-to-end.',
         'work.p2.deliverables': 'Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role-based access and audit logs, and a public no-login QR page for residents to check basic tree info.',
         'work.p2.outcome': 'Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.',
+        'work.p2.liveLabel': 'Live site:',
 
         'work.p3.title': 'Green Carbon Sink Accounting System',
         'work.p3.lead': 'Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).',
@@ -1734,6 +1750,7 @@
         'work.p2.role': '角色：作为产品管培生（2025.12–2026.02），我独立完成该系统的端到端交付。',
         'work.p2.deliverables': '交付物：Web+手机端的建档/检索、巡检与养护留痕、二维码生成与下载、角色权限与审计日志，以及面向市民的“无需登录扫码查询”公开页。',
         'work.p2.outcome': '结果：替代 Excel 管理，提升现场使用效率；覆盖 168 棵树的数据；部署上线由甲方团队接手。',
+        'work.p2.liveLabel': '上线地址：',
 
         'work.p3.title': '绿地碳汇计量核算系统',
         'work.p3.lead': '数据导入校验 → 高精度计算 → 地图可视化 → 报告导出（83 样地 / 17 区域）。',
