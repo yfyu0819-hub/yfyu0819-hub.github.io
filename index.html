@@ -1,26 +1,16 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>杨丰毓 Fay | AI 产品经理</title>
-  <meta name="description" content="杨丰毓 Fay，AI 产品经理与项目负责人，专注多模态 AI 工作流、0-1 产品交付、质量验收与上线迭代。" />
-  <meta name="theme-color" content="#ffcc00" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="canonical" href="https://yfyu0819-hub.github.io/" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="杨丰毓 Fay | AI 产品经理" />
-  <meta property="og:description" content="把多模态模型能力转化为可上线、可追溯的产品流程，负责从产品方案到交付上线的 0-1 闭环。" />
-  <meta property="og:url" content="https://yfyu0819-hub.github.io/" />
-  <meta property="og:image" content="https://yfyu0819-hub.github.io/assets/projects/6-3.png" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <title>Designer Portfolio</title>
   <style>
     /* 全局样式重置 */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Inter, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
     }
 
     body {
@@ -162,7 +152,7 @@
 
     /* 2. Hero 区 - 聚光灯动效 */
     .hero {
-      min-height: 100svh;
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -170,7 +160,7 @@
       position: relative;
       background-color: #f8f8f8;
       overflow: hidden;
-      padding: 112px 20px 72px;
+      padding: 0 20px;
       --hero-x: 0px;
       --hero-y: 0px;
     }
@@ -188,72 +178,6 @@
       align-items: center;
       transform: translate3d(var(--hero-x), var(--hero-y), 0);
       transition: transform 220ms cubic-bezier(0.2, 0.75, 0.2, 1);
-    }
-
-    .hero-proof {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 30px;
-      max-width: 900px;
-    }
-
-    .hero-proof span {
-      padding: 8px 13px;
-      border: 1px solid rgba(0, 0, 0, 0.16);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.78);
-      font-size: 0.9rem;
-      font-weight: 700;
-      backdrop-filter: blur(8px);
-    }
-
-    .hero-actions {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 11px 18px;
-      border: 2px solid #000;
-      border-radius: 999px;
-      color: #000;
-      background: transparent;
-      text-decoration: none;
-      font-weight: 800;
-      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-    }
-
-    .hero-cta--primary {
-      color: #fff;
-      background: #000;
-    }
-
-    .hero-cta--resume {
-      background: #ffcc00;
-      border-color: #ffcc00;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
-    }
-
-    .hero-cta:focus-visible {
-      outline: 3px solid #ffcc00;
-      outline-offset: 3px;
     }
 
     .hero h1 span {
@@ -408,62 +332,15 @@
 
     .project-card {
       background-color: #333;
-      border-radius: 14px;
-      overflow: hidden;
-      transition: all 0.3s;
-    }
-
-    .project-card:hover,
-    .project-card:focus-within {
-      background-color: #ffcc00;
-      color: #000;
-    }
-
-    .project-card.active {
-      background-color: #f7e8a8;
-      color: #000;
-    }
-
-    .project-toggle {
-      width: 100%;
+      border-radius: 8px;
       padding: 20px;
-      border: 0;
-      background: transparent;
-      color: inherit;
-      text-align: left;
-      font: inherit;
+      transition: all 0.3s;
       cursor: pointer;
     }
 
-    .project-title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .project-chevron {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border: 1px solid currentColor;
-      border-radius: 999px;
-      font-size: 1.25rem;
-      line-height: 1;
-      transition: transform 0.3s;
-    }
-
-    .project-card.active .project-chevron {
-      transform: rotate(45deg);
-    }
-
-    .project-toggle:focus-visible {
-      outline: 3px solid #ffcc00;
-      outline-offset: -5px;
-      border-radius: 14px;
+    .project-card:hover {
+      background-color: #ffcc00;
+      color: #000;
     }
 
     .project-card h3 {
@@ -472,15 +349,6 @@
 
     .project-card p {
       margin-bottom: 15px;
-    }
-
-    .card-content {
-      padding: 0 20px;
-    }
-
-    .card-content .project-points {
-      max-width: 980px;
-      line-height: 1.65;
     }
 
     .card-content .project-points p {
@@ -552,8 +420,7 @@
       transition: background-color 0.3s;
     }
 
-    .project-card:hover .project-tag,
-    .project-card.active .project-tag {
+    .project-card:hover .project-tag {
       background-color: #000;
       color: #fff;
     }
@@ -566,7 +433,6 @@
 
     .project-card.active .card-content {
       max-height: 800px;
-      padding-bottom: 20px;
     }
 
     .project-card img {
@@ -816,8 +682,8 @@
     }
 
     .scratch-card {
-      width: 176px;
-      height: 176px;
+      width: 150px;
+      height: 150px;
       background-color: #ccc;
       border-radius: 8px;
       display: flex;
@@ -877,11 +743,8 @@
     .keyword {
       padding: 5px 10px;
       background-color: #ffcc00;
-      color: #000;
-      border: 0;
       border-radius: 20px;
       cursor: pointer;
-      font: inherit;
       transition: all 0.3s;
     }
 
@@ -893,11 +756,6 @@
     .keyword.active {
       background-color: #000;
       color: #fff;
-    }
-
-    .keyword:focus-visible {
-      outline: 3px solid #ffcc00;
-      outline-offset: 3px;
     }
 
     .keyword-content {
@@ -1064,7 +922,7 @@
       margin: 0 auto;
       position: relative;
       z-index: 2;
-      padding-bottom: 110px;
+      padding-bottom: 140px;
     }
 
     .contact-stage {
@@ -1121,18 +979,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    .contact-pill--resume {
-      background: #fff;
-      color: #000;
-      border: 2px solid #000;
-      box-shadow: none;
-    }
-
-    .contact-pill:focus-visible {
-      outline: 3px solid #fff;
-      outline-offset: 3px;
-    }
-
     .pill-eyes {
       display: inline-flex;
       gap: 6px;
@@ -1167,7 +1013,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      height: 230px;
+      height: 320px;
       touch-action: none;
       user-select: none;
       pointer-events: auto;
@@ -1222,41 +1068,8 @@
 
     /* 响应式适配 */
     @media (max-width: 768px) {
-      .hero {
-        padding: 104px 18px 52px;
-      }
-
       .hero h1 {
-        font-size: clamp(2.1rem, 10vw, 2.5rem);
-      }
-
-      .hero-proof {
-        margin-top: 24px;
-        gap: 8px;
-      }
-
-      .hero-proof span {
-        padding: 7px 10px;
-        font-size: 0.78rem;
-      }
-
-      .hero-actions {
-        width: min(100%, 360px);
-      }
-
-      .hero-cta {
-        flex: 1 1 calc(50% - 6px);
-        min-width: 150px;
-      }
-
-      .project-toggle,
-      .card-content {
-        padding-left: 16px;
-        padding-right: 16px;
-      }
-
-      .project-title-row {
-        gap: 12px;
+        font-size: 2.5rem;
       }
 
       .contact {
@@ -1268,7 +1081,7 @@
       }
 
       .contact-inner {
-        padding-bottom: 130px;
+        padding-bottom: 160px;
       }
 
       .about-cards {
@@ -1312,17 +1125,6 @@
       <span class="accent" data-i18n="hero.b">TURN MODELS INTO PRODUCTS.</span>
       <span data-i18n="hero.c">OWN 0-1 DELIVERY.</span>
     </h1>
-    <div class="hero-proof" aria-label="Selected delivery outcomes">
-      <span data-i18n="hero.proof.team">4-person team</span>
-      <span data-i18n="hero.proof.core">~15 days to core flow</span>
-      <span data-i18n="hero.proof.launch">~45 days to launch</span>
-      <span data-i18n="hero.proof.docs">20+ PRDs / specs</span>
-    </div>
-    <div class="hero-actions">
-      <a class="hero-cta hero-cta--primary" href="#work" data-i18n="hero.cta.work">View case studies</a>
-      <a class="hero-cta hero-cta--resume" href="assets/resume/杨丰毓_AI产品经理_简历.pdf" download data-i18n="hero.cta.resume">Download résumé</a>
-      <a class="hero-cta" href="#contact" data-i18n="hero.cta.contact">Contact me</a>
-    </div>
     <div class="decor decor-1"></div>
     <div class="decor decor-2"></div>
     <div class="spotlight" id="spotlight"></div>
@@ -1331,23 +1133,21 @@
   <!-- 项目展示区 - 手风琴卡片 -->
   <section class="projects" id="work">
     <h2 data-i18n="work.title">Project Experience</h2>
+    <div class="work-hint-wrap">
+      <div class="work-hint" data-i18n="work.sectionHint">Click to view project details</div>
+    </div>
     <div class="project-cards">
-      <article class="project-card">
-        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-p6-content">
-          <div class="project-title-row">
-            <h3 data-i18n="work.p6.title">AI Comic Drama Production Platform</h3>
-            <span class="project-chevron" aria-hidden="true">+</span>
-          </div>
-          <p data-i18n="work.p6.lead">Led a four-person team from project kickoff to a working core flow in about half a month, then to official launch in about one and a half months.</p>
-          <div class="project-tags">
-            <span class="project-tag" data-i18n="work.p6.tag1">0-1 Product Leadership</span>
-            <span class="project-tag" data-i18n="work.p6.tag2">Multimodal AI Workflow</span>
-            <span class="project-tag" data-i18n="work.p6.tag3">Reliability & Traceability</span>
-          </div>
-        </button>
-        <div class="card-content" id="project-p6-content" aria-hidden="true" inert>
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p6.title">AI Comic Drama Production Platform</h3>
+        <p data-i18n="work.p6.lead">Led a four-person team from project kickoff to a working core flow in about half a month, then to official launch in about one and a half months.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p6.tag1">0-1 Product Leadership</div>
+          <div class="project-tag" data-i18n="work.p6.tag2">Multimodal AI Workflow</div>
+          <div class="project-tag" data-i18n="work.p6.tag3">Reliability & Traceability</div>
+        </div>
+        <div class="card-content">
           <div class="project-points">
-            <p data-i18n="work.p6.role">Role: As AI Product Manager and project lead, I owned requirements, product design, task breakdown, scheduling, cross-functional coordination, risk management, acceptance, and launch.</p>
+            <p data-i18n="work.p6.role">Role: As AI Product Manager and the actual project lead, I owned requirements, product design, task breakdown, scheduling, cross-functional coordination, risk management, acceptance, and launch.</p>
             <p data-i18n="work.p6.deliverables">Deliverables: one production flow spanning intelligent episode splitting; asset extraction and image generation; storyboard breakdown and image generation; single-shot video; dubbing; audio-video mux; and final video merge across LLM, image, video, and voice tasks.</p>
             <p data-i18n="work.p6.outcome">Outcome: set Prompt, reference-image, and asset-binding rules; defined model, quality, latency, and cost acceptance criteria; and shipped task recovery, retry, media history, and rollback to reduce full-flow rework.</p>
           </div>
@@ -1368,22 +1168,17 @@
             </a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <article class="project-card">
-        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-p1-content">
-          <div class="project-title-row">
-            <h3 data-i18n="work.p1.title">Server & Database Pricing Tool (In-house)</h3>
-            <span class="project-chevron" aria-hidden="true">+</span>
-          </div>
-          <p data-i18n="work.p1.lead">Cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons.</p>
-          <div class="project-tags">
-            <span class="project-tag" data-i18n="work.p1.tag1">Quote Automation</span>
-            <span class="project-tag" data-i18n="work.p1.tag2">Multi-cloud Pricing</span>
-            <span class="project-tag" data-i18n="work.p1.tag3">Decision Support</span>
-          </div>
-        </button>
-        <div class="card-content" id="project-p1-content" aria-hidden="true" inert>
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p1.title">Server & Database Pricing Tool (In-house)</h3>
+        <p data-i18n="work.p1.lead">Cut quote prep time by ~80% (30 min → 6 min) with multi-cloud pricing lookup and comparisons.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p1.tag1">Quote Automation</div>
+          <div class="project-tag" data-i18n="work.p1.tag2">Multi-cloud Pricing</div>
+          <div class="project-tag" data-i18n="work.p1.tag3">Decision Support</div>
+        </div>
+        <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p1.role">Role: I identified and owned the optimization of a slow multi-cloud quoting workflow and drove a tool-based solution. Previously, sales checked Aliyun/Huawei Cloud/Tencent Cloud pricing page by page and manually filled quote sheets.</p>
             <p data-i18n="work.p1.deliverables">Deliverables: API integrations across multiple cloud vendors, spec/vendor filtering, auto-comparison, and a standardized quote template with comparison/recommendation views.</p>
@@ -1402,27 +1197,24 @@
             </a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <article class="project-card">
-        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-p2-content">
-          <div class="project-title-row">
-            <h3 data-i18n="work.p2.title">Tree Inventory & QR Lookup System</h3>
-            <span class="project-chevron" aria-hidden="true">+</span>
-          </div>
-          <p data-i18n="work.p2.lead">Replace Excel-based tree management with a web + mobile workflow, plus a public QR page for residents.</p>
-          <div class="project-tags">
-            <span class="project-tag" data-i18n="work.p2.tag1">Web + Mobile</span>
-            <span class="project-tag" data-i18n="work.p2.tag2">QR Public Lookup</span>
-            <span class="project-tag" data-i18n="work.p2.tag3">Audit & Roles</span>
-          </div>
-        </button>
-        <div class="card-content" id="project-p2-content" aria-hidden="true" inert>
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p2.title">Tree Inventory & QR Lookup System</h3>
+        <p data-i18n="work.p2.lead">Replace Excel-based tree management with a web + mobile workflow, plus a public QR page for residents.</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p2.tag1">Web + Mobile</div>
+          <div class="project-tag" data-i18n="work.p2.tag2">QR Public Lookup</div>
+          <div class="project-tag" data-i18n="work.p2.tag3">Audit & Roles</div>
+        </div>
+        <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p2.role">Role: I independently drove this client system from requirements and solution design through developer coordination, acceptance, and delivery handoff.</p>
             <p data-i18n="work.p2.deliverables">Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role/audit basics, and a public no-login QR lookup page.</p>
             <p data-i18n="work.p2.outcome">Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.</p>
-            <p class="project-handoff" data-i18n="work.p2.handoff">Delivery note: the system was handed over to the client, who now maintains the production environment; screenshots here document the delivered product.</p>
+            <p class="project-link" onclick="event.stopPropagation()"><span data-i18n="work.p2.liveLabel">Live site:</span>
+              <a href="http://39.103.204.41:3000/" target="_blank" rel="noopener" onclick="event.stopPropagation()">http://39.103.204.41:3000/</a>
+            </p>
           </div>
           <div class="gallery-hint" data-i18n="work.galleryHint" onclick="event.stopPropagation()">Swipe to see more →</div>
           <div class="project-gallery" aria-label="Project 2 images">
@@ -1437,22 +1229,17 @@
             </a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <article class="project-card">
-        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-p3-content">
-          <div class="project-title-row">
-            <h3 data-i18n="work.p3.title">Green Carbon Sink Accounting System</h3>
-            <span class="project-chevron" aria-hidden="true">+</span>
-          </div>
-          <p data-i18n="work.p3.lead">Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).</p>
-          <div class="project-tags">
-            <span class="project-tag" data-i18n="work.p3.tag1">Data Validation</span>
-            <span class="project-tag" data-i18n="work.p3.tag2">Species-specific Formula</span>
-            <span class="project-tag" data-i18n="work.p3.tag3">Map & Reporting</span>
-          </div>
-        </button>
-        <div class="card-content" id="project-p3-content" aria-hidden="true" inert>
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p3.title">Green Carbon Sink Accounting System</h3>
+        <p data-i18n="work.p3.lead">Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p3.tag1">Data Validation</div>
+          <div class="project-tag" data-i18n="work.p3.tag2">Species-specific Formula</div>
+          <div class="project-tag" data-i18n="work.p3.tag3">Map & Reporting</div>
+        </div>
+        <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p3.role">Role: I independently designed and iterated the end-to-end accounting workflow, making calculation rules and edge cases clear, traceable, and testable.</p>
             <p data-i18n="work.p3.deliverables">Deliverables: Excel import + validation, species-specific calculation logic with parameter checks, traceable results, map visualization, and report export.</p>
@@ -1481,22 +1268,17 @@
             </a>
           </div>
         </div>
-      </article>
+      </div>
 
-      <article class="project-card project-card--supporting">
-        <button class="project-toggle" type="button" aria-expanded="false" aria-controls="project-p4-content">
-          <div class="project-title-row">
-            <h3 data-i18n="work.p4.title">Mexico ERP System Stabilization</h3>
-            <span class="project-chevron" aria-hidden="true">+</span>
-          </div>
-          <p data-i18n="work.p4.lead">During delivery, how do we quickly build test coverage, drive bug closure, verify fixes, and speed up regression?</p>
-          <div class="project-tags">
-            <span class="project-tag" data-i18n="work.p4.tag1">QA & Test Cases</span>
-            <span class="project-tag" data-i18n="work.p4.tag2">Bug Triage</span>
-            <span class="project-tag" data-i18n="work.p4.tag3">Localization & UI</span>
-          </div>
-        </button>
-        <div class="card-content" id="project-p4-content" aria-hidden="true" inert>
+      <div class="project-card" onclick="this.classList.toggle('active')">
+        <h3 data-i18n="work.p4.title">Mexico ERP System Stabilization</h3>
+        <p data-i18n="work.p4.lead">During delivery, how do we quickly build test coverage, drive bug closure, verify fixes, and speed up regression?</p>
+        <div class="project-tags">
+          <div class="project-tag" data-i18n="work.p4.tag1">QA & Test Cases</div>
+          <div class="project-tag" data-i18n="work.p4.tag2">Bug Triage</div>
+          <div class="project-tag" data-i18n="work.p4.tag3">Localization & UI</div>
+        </div>
+        <div class="card-content">
           <div class="project-points">
             <p data-i18n="work.p4.role">Role: I supported Mexico ERP quality assurance and stabilization work (Nov 2025–Feb 2026), focusing on building test coverage and driving defect closure.</p>
             <p data-i18n="work.p4.deliverables">Deliverables: 30+ test cases, regression checks on core flows, and end-to-end bug tracking from reproduction to verification.</p>
@@ -1509,7 +1291,7 @@
             </a>
           </div>
         </div>
-      </article>
+      </div>
 
     </div>
   </section>
@@ -1524,14 +1306,24 @@
           <img src="assets/projects/about-1.jpg" alt="Avatar" />
           <canvas class="scratch-layer" aria-hidden="true"></canvas>
         </div>
+        <div class="scratch-card">
+          <span data-i18n="about.scratch.2">Scratch to reveal 🥰</span>
+          <img src="assets/projects/about-2.jpg" alt="Avatar" />
+          <canvas class="scratch-layer" aria-hidden="true"></canvas>
+        </div>
+        <div class="scratch-card">
+          <span data-i18n="about.scratch.3">Nice to meet you 🥳</span>
+          <img src="assets/projects/about-3.jpg" alt="Avatar" />
+          <canvas class="scratch-layer" aria-hidden="true"></canvas>
+        </div>
       </div>
 
       <div class="keywords">
         <div class="keyword-list">
-          <button class="keyword" type="button" data-content="art" onclick="showContent('art')" data-i18n="about.kw.art">Multimodal AI</button>
-          <button class="keyword" type="button" data-content="physical" onclick="showContent('physical')" data-i18n="about.kw.physical">0-1 Delivery</button>
-          <button class="keyword" type="button" data-content="digital" onclick="showContent('digital')" data-i18n="about.kw.digital">Outcomes</button>
-          <button class="keyword" type="button" data-content="business" onclick="showContent('business')" data-i18n="about.kw.business">English</button>
+          <div class="keyword" data-content="art" onclick="showContent('art')" data-i18n="about.kw.art">Multimodal AI</div>
+          <div class="keyword" data-content="physical" onclick="showContent('physical')" data-i18n="about.kw.physical">0-1 Delivery</div>
+          <div class="keyword" data-content="digital" onclick="showContent('digital')" data-i18n="about.kw.digital">Outcomes</div>
+          <div class="keyword" data-content="business" onclick="showContent('business')" data-i18n="about.kw.business">English</div>
         </div>
 
         <div class="keyword-content" id="art">
@@ -1696,20 +1488,32 @@
     </div>
   </section>
 
-  <!-- 联系区 - 核心能力标签 + 联系方式 -->
+  <!-- 联系区 - 动态标签云 + 眼睛跟随 -->
   <section class="contact" id="contact">
-    <div class="contact-stage">
-      <div class="tag-physics" id="tagPhysics" aria-label="Core skills">
-        <span class="tag-chip" data-i18n="contact.tag.journey">REQUIREMENTS</span>
-        <span class="tag-chip" data-i18n="contact.tag.problem">PROBLEM FRAMING</span>
-        <span class="tag-chip" data-i18n="contact.tag.figma">FIGMA</span>
-        <span class="tag-chip" data-i18n="contact.tag.basic">ENGLISH COMMUNICATION</span>
-        <span class="tag-chip" data-i18n="contact.tag.framer">PROTOTYPING</span>
-        <span class="tag-chip" data-i18n="contact.tag.usability">UAT & TESTING</span>
-        <span class="tag-chip" data-i18n="contact.tag.adobe">DOCUMENTATION</span>
-        <span class="tag-chip" data-i18n="contact.tag.rhino">API INTEGRATION</span>
-        <span class="tag-chip" data-i18n="contact.tag.stakeholder">CROSS-TEAM COMMUNICATION</span>
-        <span class="tag-chip" data-i18n="contact.tag.uxStructure">ACCEPTANCE CRITERIA</span>
+    <div class="contact-stage" aria-hidden="true">
+      <div class="tag-physics" id="tagPhysics" aria-label="Skill tags">
+        <button class="tag-chip" type="button" data-i18n="contact.tag.journey">REQUIREMENTS</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.problem">PROBLEM FRAMING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.figma">FIGMA</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.basic">ENGLISH COMMUNICATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.framer">PROTOTYPING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.usability">UAT & TESTING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.adobe">DOCUMENTATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.rhino">API INTEGRATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.designSystems">SYSTEMS THINKING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.wireframes">WIREFRAMES</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.taskFlows">TASK FLOWS</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.prototyping">RELEASE PLANNING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.competitive">EDGE CASES</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.userResearch">USER FEEDBACK</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.stakeholder">CROSS-TEAM COMMUNICATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.responsive">MOBILE / WEB</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.accessibility">LOCALIZATION</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.uxStructure">ACCEPTANCE CRITERIA</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.html">HTML</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.service">PROCESS MAPPING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.story">CLEAR WRITING</button>
+        <button class="tag-chip" type="button" data-i18n="contact.tag.max">BUG TRIAGE</button>
       </div>
     </div>
     <div class="contact-inner">
@@ -1731,9 +1535,6 @@
             <span class="pill-eye"><span class="pill-pupil"></span></span>
           </span>
         </button>
-        <a class="contact-pill contact-pill--resume" href="assets/resume/杨丰毓_AI产品经理_简历.pdf" download>
-          <span data-i18n="contact.resume">Download résumé</span>
-        </a>
       </div>
 
     </div>
@@ -1765,7 +1566,7 @@
     const LANG_KEY = 'portfolio.lang';
     const I18N = {
       en: {
-        'meta.title': 'Fay Yang | AI Product Manager',
+        'meta.title': 'Fay Yang | Portfolio',
         'brand.logo': 'Fay Yang',
         'nav.work': 'Work',
         'nav.about': 'About',
@@ -1777,13 +1578,6 @@
         'hero.a': 'AI Product Manager.',
         'hero.b': 'Turn models into products.',
         'hero.c': 'Own 0-1 delivery.',
-        'hero.proof.team': '4-person team',
-        'hero.proof.core': '~15 days to core flow',
-        'hero.proof.launch': '~45 days to launch',
-        'hero.proof.docs': '20+ PRDs / specs',
-        'hero.cta.work': 'View case studies',
-        'hero.cta.resume': 'Download résumé',
-        'hero.cta.contact': 'Contact me',
 
         'work.title': 'Project Experience',
         'work.sectionHint': 'Click to view project details',
@@ -1805,7 +1599,7 @@
         'work.p2.role': 'Role: I independently drove this client system from requirements and solution design through developer coordination, acceptance, and delivery handoff (Dec 2025–Feb 2026).',
         'work.p2.deliverables': 'Deliverables: web + mobile flows for inventory, inspection and maintenance records, QR code generation, role-based access and audit logs, and a public no-login QR page for residents to check basic tree info.',
         'work.p2.outcome': 'Outcome: replaced Excel-based tracking and enabled field-friendly usage; dataset covered 168 trees; deployment/go-live was handed off to the client team.',
-        'work.p2.handoff': 'Delivery note: the system was handed over to the client, who now maintains the production environment; screenshots here document the delivered product.',
+        'work.p2.liveLabel': 'Live site:',
 
         'work.p3.title': 'Green Carbon Sink Accounting System',
         'work.p3.lead': 'Data import & validation → high-precision calculation → map visualization → report export (83 plots / 17 areas).',
@@ -1830,12 +1624,14 @@
         'work.p6.tag1': '0-1 Product Leadership',
         'work.p6.tag2': 'Multimodal AI Workflow',
         'work.p6.tag3': 'Reliability & Traceability',
-        'work.p6.role': 'Role: As AI Product Manager and project lead, I owned requirements, product design, task breakdown, scheduling, cross-functional coordination, risk management, acceptance, and launch.',
+        'work.p6.role': 'Role: As AI Product Manager and the actual project lead, I owned requirements, product design, task breakdown, scheduling, cross-functional coordination, risk management, acceptance, and launch.',
         'work.p6.deliverables': 'Deliverables: one production flow spanning intelligent episode splitting; asset extraction and image generation; storyboard breakdown and image generation; single-shot video; dubbing; audio-video mux; and final video merge across LLM, image, video, and voice tasks.',
         'work.p6.outcome': 'Outcome: set Prompt, reference-image, and asset-binding rules; defined model, quality, latency, and cost acceptance criteria; and shipped task recovery, retry, media history, and rollback to reduce full-flow rework.',
 
         'about.title': 'About: AI Product & Delivery',
         'about.scratch.1': 'Hi, I’m Fay ✨',
+        'about.scratch.2': 'Scratch to reveal 🥰',
+        'about.scratch.3': 'Nice to meet you 🥳',
         'about.kw.art': 'Multimodal AI',
         'about.kw.physical': '0-1 Delivery',
         'about.kw.digital': 'Outcomes',
@@ -1858,9 +1654,8 @@
         'about.cards.collab.body': 'Communicate clearly with cross-functional teams and English-speaking stakeholders, keeping updates frequent and decisions explicit.',
 
         'contact.title': "Let’s Connect",
-        'contact.body': 'Looking for an AI Product Manager who can connect product design, project execution, quality acceptance, and launch? Email me, add me on WeChat, or download my résumé.',
+        'contact.body': 'I’m Fay Yang (杨丰毓), an AI Product Manager who turns multimodal model capabilities into reliable, production-ready workflows. I lead 0-1 delivery across product design, project execution, quality, stability, and launch. If you’re hiring for AI product roles, I’d love to connect.',
         'contact.wechat': 'WeChat: potato0com',
-        'contact.resume': 'Download résumé',
         'contact.tag.journey': 'REQUIREMENTS',
         'contact.tag.problem': 'PROBLEM FRAMING',
         'contact.tag.figma': 'FIGMA',
@@ -1885,7 +1680,7 @@
         'contact.tag.max': 'BUG TRIAGE',
       },
       zh: {
-        'meta.title': '杨丰毓 Fay | AI 产品经理',
+        'meta.title': '杨丰毓 Fay | 简介',
         'brand.logo': '杨丰毓',
         'nav.work': '作品',
         'nav.about': '关于',
@@ -1897,13 +1692,6 @@
         'hero.a': 'AI 产品经理。',
         'hero.b': '把模型变成产品。',
         'hero.c': '负责 0-1 交付。',
-        'hero.proof.team': '4 人团队',
-        'hero.proof.core': '约 15 天跑通核心链路',
-        'hero.proof.launch': '约 45 天正式上线',
-        'hero.proof.docs': '20+ PRD／规格',
-        'hero.cta.work': '查看核心案例',
-        'hero.cta.resume': '下载 PDF 简历',
-        'hero.cta.contact': '联系我',
 
         'work.title': '项目经验',
         'work.sectionHint': '点击可查看项目详情',
@@ -1925,7 +1713,7 @@
         'work.p2.role': '角色：我独立推进该客户系统从需求分析、方案设计、开发对接到测试验收及交付（2025.12–2026.02）。',
         'work.p2.deliverables': '交付物：Web+手机端的建档/检索、巡检与养护留痕、二维码生成与下载、角色权限与审计日志，以及面向市民的“无需登录扫码查询”公开页。',
         'work.p2.outcome': '结果：替代 Excel 管理，提升现场使用效率；覆盖 168 棵树的数据；部署上线由甲方团队接手。',
-        'work.p2.handoff': '交付说明：系统已移交甲方，线上环境由甲方维护；本作品集通过项目截图展示已交付成果。',
+        'work.p2.liveLabel': '上线地址：',
 
         'work.p3.title': '绿地碳汇计量核算系统',
         'work.p3.lead': '数据导入校验 → 高精度计算 → 地图可视化 → 报告导出（83 样地 / 17 区域）。',
@@ -1950,12 +1738,14 @@
         'work.p6.tag1': '0-1 产品负责',
         'work.p6.tag2': '多模态 AI 工作流',
         'work.p6.tag3': '稳定性与可追溯',
-        'work.p6.role': '角色：作为 AI 产品经理和项目负责人，我统筹需求分析、产品方案、任务拆分、排期、跨团队协同、风险管理、测试验收与上线。',
+        'work.p6.role': '角色：作为 AI 产品经理和项目实际负责人，我统筹需求分析、产品方案、任务拆分、排期、跨团队协同、风险管理、测试验收与上线。',
         'work.p6.deliverables': '交付物：将智能分集、资产提取与生图、分镜拆解与生图、单镜视频、配音、音画合轨及成片合并统一为一套生产流程，串联 LLM、图像、视频与语音四类生成任务。',
         'work.p6.outcome': '结果：建立 Prompt、参考图及角色／场景／道具绑定规则，制定模型、质量、耗时与成本验收标准，并推动任务恢复与重试、媒体版本历史与回滚落地，降低全流程重做风险。',
 
         'about.title': '关于我：AI 产品与交付',
         'about.scratch.1': '嗨，我是 Fay ✨',
+        'about.scratch.2': '刮开看看我 🥰',
+        'about.scratch.3': '很高兴认识你 🥳',
         'about.kw.art': '多模态 AI',
         'about.kw.physical': '0-1 交付',
         'about.kw.digital': '结果',
@@ -1978,9 +1768,8 @@
         'about.cards.collab.body': '与跨团队/全英文干系人保持高频沟通，把决策与变更说清楚、落到执行。',
 
         'contact.title': '欢迎联系',
-        'contact.body': '如果你正在寻找能串联产品方案、项目推进、质量验收与上线迭代的 AI 产品经理，欢迎发送邮件、添加微信或下载我的简历。',
+        'contact.body': '我是杨丰毓 Fay，AI 产品经理，擅长把多模态模型能力转化为可上线、可追溯的生产流程，负责从产品方案、项目推进到质量验收与上线迭代的 0-1 交付。欢迎通过邮箱或微信联系。',
         'contact.wechat': '微信：potato0com',
-        'contact.resume': '下载 PDF 简历',
         'contact.tag.journey': '需求拆解',
         'contact.tag.problem': '问题定义',
         'contact.tag.figma': 'Figma',
@@ -2079,23 +1868,6 @@
         btn.focus();
       });
     })();
-
-    // 项目手风琴：按钮负责交互与展开状态，卡片仅负责视觉呈现
-    document.querySelectorAll('.project-toggle').forEach((toggle) => {
-      toggle.addEventListener('click', () => {
-        const card = toggle.closest('.project-card');
-        if (!card) return;
-        const expanded = !card.classList.contains('active');
-        const contentId = toggle.getAttribute('aria-controls');
-        const content = contentId ? document.getElementById(contentId) : null;
-        card.classList.toggle('active', expanded);
-        toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-        if (content) {
-          content.setAttribute('aria-hidden', expanded ? 'false' : 'true');
-          content.inert = !expanded;
-        }
-      });
-    });
 
     // 聚光灯动效
     const spotlight = document.getElementById('spotlight');

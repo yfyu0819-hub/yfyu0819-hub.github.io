@@ -1,40 +1,39 @@
-# Recruiter Conversion Optimization Status
+# Portfolio v4 Sync Status
 
 ## Approved scope
 
-- Preserve the bilingual single-page portfolio and its black, white, and yellow visual identity.
-- Add recruiter-facing hero proof points and direct actions for case studies, résumé download, and contact.
-- Publish the verified PDF résumé without changing its content.
-- Keep all five evidence-backed projects; do not add company names, salary preferences, or unverified outcomes.
-- Replace the dead client-hosted demo URL with a truthful delivery-handoff note.
-- Improve project readability, keyboard access, SEO/social metadata, and public-asset hygiene.
-- Reduce decorative clutter while retaining one scratch-card portrait and the existing contact interaction.
+- Preserve the existing bilingual single-page design, animations, and media interactions.
+- Move the AI comic drama platform project to the first project-card position.
+- Rewrite that project from the verified final resume: AI Product Manager and actual project lead; four-person team; core flow completed in about half a month; official launch in about one and a half months; multimodal task orchestration, reference constraints, recovery, history, rollback, quality, and cost decisions.
+- Remove the food-delivery project from the page and both translation dictionaries.
+- Remove the outdated "product trainee" positioning from hero, project roles, about, and contact copy.
+- Keep the other four projects and their evidence-backed outcomes.
+- Do not publish the current employer's legal name.
+- Verify English and Chinese views at desktop and mobile widths, then publish to GitHub Pages.
 
 ## Workspace
 
-- Worktree: `D:\Yang\.worktrees\portfolio-recruiter-conversion`
-- Branch: `codex/portfolio-recruiter-conversion`
-- Baseline: `e38752dfb052b49114745ef0536e6d536474c032` (`origin/main` at task start)
+- Worktree: `D:\Yang\.worktrees\portfolio-v4-sync`
+- Branch: `codex/portfolio-v4-sync`
+- Baseline: `cd16b87476772763782a36dca04d7ce749ecc498`
+- Baseline equals `origin/main` after fetch on 2026-08-26.
 
 ## Progress
 
-- [x] Baseline verified: 3 existing tests passed and the worktree was clean.
-- [x] TDD red phase verified: five new requirement groups failed against the old page.
-- [x] Added hero outcome chips plus case-study, résumé, and contact actions.
-- [x] Added the verified résumé at `assets/resume/杨丰毓_AI产品经理_简历.pdf`.
-- [x] Replaced the broken external demo link with an accurate client-handoff statement.
-- [x] Converted project accordions to semantic buttons with `aria-expanded`, `aria-controls`, and inert collapsed content.
-- [x] Added static recruiting title/description, canonical, Open Graph, Twitter card, and a local favicon.
-- [x] Softened expanded project styling, reduced skill tags from 22 to 10, and reduced scratch-card portraits from three to one.
-- [x] Removed unused backup portraits, former food-delivery images, and two unused public profile photos.
-- [x] Local browser verification completed for Chinese and English desktop views, hero CTAs, project expansion, lower-page layout, assets, and horizontal overflow.
-- [x] Committed the verified implementation as `ac8094c288460142e15a2191d66162ffa9f8c4be`, pushed it to `origin/main` after explicit user approval, and verified the public deployment.
+- [x] Approved design and scope recorded.
+- [x] Isolated worktree created and remote baseline verified.
+- [x] Added content/structure tests; the old page failed all three expected contracts.
+- [x] Updated `index.html` with five evidence-backed projects and resume-aligned bilingual positioning.
+- [x] Local verification completed: 3/3 content tests passed; desktop and 390x844 mobile layouts had no horizontal overflow; both languages, project expansion, images, and video preview worked; browser logs were empty.
+- [x] Committed as `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b` and pushed to `origin/main`; local and remote SHAs match.
+- [x] Restored the public site after explicit user approval: repository visibility is `public`, GitHub Pages publishes from `main / root`, and the deployed SHA is live at `https://yfyu0819-hub.github.io/`.
 
 ## Verification evidence
 
-- Automated tests: `node tests/portfolio-content.test.mjs` -> 9 passed, 0 failed.
-- Desktop browser: 5 semantic project toggles, 3 hero CTAs, 1 scratch card, 10 skill tags, and no horizontal overflow.
-- Interaction: the first project changes `aria-expanded` from `false` to `true`, exposes its controlled content, and renders the softened active state.
-- Language: Chinese title is `杨丰毓 Fay | AI 产品经理`; English title is `Fay Yang | AI Product Manager`; both views render without horizontal overflow.
-- Local HTTP: the page, current media, Matter.js, and `assets/favicon.svg` returned 200/304; the final reload produced no missing-asset response.
-- Publication: GitHub Actions run `32956976784` completed successfully for implementation SHA `ac8094c288460142e15a2191d66162ffa9f8c4be`; the public page, résumé, favicon, and project interaction were verified at `https://yfyu0819-hub.github.io/`.
+- Test command: `node tests/portfolio-content.test.mjs` -> 3 passed, 0 failed.
+- Desktop: five cards; English and Chinese switching; first card expands; both first-project images loaded; no horizontal overflow.
+- Mobile: 390x844; English and Chinese checked; no horizontal overflow; first-project heading fits its card; expanded content height stays within the 800px accordion limit.
+- Media: the first-project video opened in the existing lightbox with playback controls.
+- Runtime: no browser console logs or JavaScript errors were reported.
+- Remote: `origin/main` equals `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b`.
+- Publication: GitHub Actions run `32950684690` completed successfully for SHA `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b`; the public page returned HTTP 200 and contained the new portfolio content.
