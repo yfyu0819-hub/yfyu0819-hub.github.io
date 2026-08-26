@@ -25,7 +25,8 @@
 - [x] Added content/structure tests; the old page failed all three expected contracts.
 - [x] Updated `index.html` with five evidence-backed projects and resume-aligned bilingual positioning.
 - [x] Local verification completed: 3/3 content tests passed; desktop and 390x844 mobile layouts had no horizontal overflow; both languages, project expansion, images, and video preview worked; browser logs were empty.
-- [ ] Commit, publish to `origin/main`, and verify the public site.
+- [x] Committed as `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b` and pushed to `origin/main`; local and remote SHAs match.
+- [x] Restored the public site after explicit user approval: repository visibility is `public`, GitHub Pages publishes from `main / root`, and the deployed SHA is live at `https://yfyu0819-hub.github.io/`.
 
 ## Verification evidence
 
@@ -34,3 +35,5 @@
 - Mobile: 390x844; English and Chinese checked; no horizontal overflow; first-project heading fits its card; expanded content height stays within the 800px accordion limit.
 - Media: the first-project video opened in the existing lightbox with playback controls.
 - Runtime: no browser console logs or JavaScript errors were reported.
+- Remote: `origin/main` equals `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b`.
+- Publication: GitHub Actions run `32950684690` completed successfully for SHA `5512895e329eeaa4d2e5cb3f96466fa2f6436b6b`; the public page returned HTTP 200 and contained the new portfolio content.
