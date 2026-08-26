@@ -28,7 +28,7 @@
 - [x] Softened expanded project styling, reduced skill tags from 22 to 10, and reduced scratch-card portraits from three to one.
 - [x] Removed unused backup portraits, former food-delivery images, and two unused public profile photos.
 - [x] Local browser verification completed for Chinese and English desktop views, hero CTAs, project expansion, lower-page layout, assets, and horizontal overflow.
-- [ ] Commit the verified changes and publish after explicit user approval.
+- [x] Committed the verified implementation as `ac8094c288460142e15a2191d66162ffa9f8c4be`, pushed it to `origin/main` after explicit user approval, and verified the public deployment.
 
 ## Verification evidence
 
@@ -37,4 +37,4 @@
 - Interaction: the first project changes `aria-expanded` from `false` to `true`, exposes its controlled content, and renders the softened active state.
 - Language: Chinese title is `杨丰毓 Fay | AI 产品经理`; English title is `Fay Yang | AI Product Manager`; both views render without horizontal overflow.
 - Local HTTP: the page, current media, Matter.js, and `assets/favicon.svg` returned 200/304; the final reload produced no missing-asset response.
-- Publication is intentionally pending; no push or GitHub Pages deployment has been performed for this task.
+- Publication: GitHub Actions run `32956976784` completed successfully for implementation SHA `ac8094c288460142e15a2191d66162ffa9f8c4be`; the public page, résumé, favicon, and project interaction were verified at `https://yfyu0819-hub.github.io/`.
