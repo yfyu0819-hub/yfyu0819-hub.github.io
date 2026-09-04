@@ -1,5 +1,14 @@
 # Portfolio v4 Sync Status
 
+## 2026-09-04 Product-focused positioning
+
+- User approved syncing the website with the product-focused resume and publishing to the original URL without changing the design.
+- Baseline: bd52f75 (restored original design); fetched origin/main and verified HEAD...origin/main = 0/0 before editing.
+- Updated only 30 text lines in index.html: English fallback text plus both language dictionaries. Replaced team-lead positioning with requirements, workflows, prototypes/PRDs, model evaluation and product iteration. Kept team size, delivery timelines, project outcomes, media and all CSS/interaction code unchanged.
+- Existing content tests: 3/3 passed. Headless Chrome: desktop 1440x1000 and mobile 390x844, both languages, five project cards, expanded first-card content fits, no horizontal overflow or page errors. Inspected screenshots; shortened Chinese hero text to avoid splitting a word on mobile.
+- QA script/screenshots: D:/Yang/.worktrees/job-application-run/tmp/portfolio-product-focus-qa.cjs and portfolio-product-focus-qa/ (local evidence, not published).
+- Publication pending remote push and live-content verification. No resume files or online recruitment profiles changed.
+
 ## Approved scope
 
 - Preserve the existing bilingual single-page design, animations, and media interactions.
